@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package ch.tutteli.niok
 
 import java.io.IOException
@@ -20,13 +22,13 @@ fun Path.appendText(text: String, charset: Charset = Charsets.UTF_8) =
 /**
  * @see kotlin.io.bufferedReader
  */
-fun Path.bufferedReader(charset: Charset = Charsets.UTF_8, bufferSize: Int = DEFAULT_BUFFER_SIZE) =
+inline fun Path.bufferedReader(charset: Charset = Charsets.UTF_8, bufferSize: Int = DEFAULT_BUFFER_SIZE) =
     this.toFile().bufferedReader(charset, bufferSize)
 
 /**
  * @see kotlin.io.bufferedWriter
  */
-fun Path.bufferedWriter(charset: Charset = Charsets.UTF_8, bufferSize: Int = DEFAULT_BUFFER_SIZE) =
+inline fun Path.bufferedWriter(charset: Charset = Charsets.UTF_8, bufferSize: Int = DEFAULT_BUFFER_SIZE) =
     this.toFile().bufferedWriter(charset, bufferSize)
 
 // TODO there are probably better ways than reusing kotlin copyRecursively
@@ -83,7 +85,7 @@ fun Path.forEachLine(charset: Charset = Charsets.UTF_8, action: (line: String) -
 /**
  * @see kotlin.io.inputStream
  */
-fun Path.inputStream() = this.toFile().inputStream()
+inline fun Path.inputStream() = this.toFile().inputStream()
 
 /**
  * @see kotlin.io.invariantSeparatorsPath
@@ -107,12 +109,12 @@ val Path.nameWithoutExtension get() = this.toFile().nameWithoutExtension
 /**
  * @see kotlin.io.outputStream
  */
-fun Path.outputStream() = this.toFile().outputStream()
+inline fun Path.outputStream() = this.toFile().outputStream()
 
 /**
  * @see kotlin.io.printWriter
  */
-fun Path.printWriter(charset: Charset = Charsets.UTF_8) =
+inline fun Path.printWriter(charset: Charset = Charsets.UTF_8) =
     this.toFile().printWriter(charset)
 
 /**
@@ -128,7 +130,7 @@ fun Path.readLines() = this.toFile().readLines()
 /**
  * @see kotlin.io.reader
  */
-fun Path.reader(charset: Charset = Charsets.UTF_8) = this.toFile().reader(charset)
+inline fun Path.reader(charset: Charset = Charsets.UTF_8) = this.toFile().reader(charset)
 
 //TODO check if File.relativeTo is the same as Path.relativize
 /**
@@ -162,7 +164,7 @@ fun Path.toRelativeString(base: Path) = this.toFile().toRelativeString(base.toFi
 /**
  * @see kotlin.io.useLines
  */
-fun <T> Path.useLines(charset: Charset = Charsets.UTF_8, block: (Sequence<String>) -> T) =
+inline fun <T> Path.useLines(charset: Charset = Charsets.UTF_8, block: (Sequence<String>) -> T) =
     this.toFile().useLines(charset, block)
 
 /**
@@ -179,4 +181,4 @@ fun Path.writeText(text: String, charset: Charset = Charsets.UTF_8) =
 /**
  * @see kotlin.io.writer
  */
-fun Path.writer(charset: Charset = Charsets.UTF_8) = this.toFile().writer(charset)
+inline fun Path.writer(charset: Charset = Charsets.UTF_8) = this.toFile().writer(charset)
