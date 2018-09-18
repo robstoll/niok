@@ -5,7 +5,7 @@
 # Niok - java.nio.file for Kotlin
 
 Niok provides a Kotlin idiomatic API for java.nio.file.
-We believe that using `Paths` and `Files` decreases readability => extension functions to the rescue :)
+We believe that using `Files` decreases readability => extension functions to the rescue :)
 
 # License
 Niok is licensed under [Apache 2.0](http://opensource.org/licenses/Apache2.0).
