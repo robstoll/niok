@@ -3,33 +3,26 @@
 package ch.tutteli.niok
 
 import java.io.IOException
+import java.io.InputStreamReader
+import java.io.PrintWriter
 import java.nio.charset.Charset
-import java.nio.file.Files
 import java.nio.file.Path
 
 /**
  * @see kotlin.io.appendBytes
  */
-fun Path.appendBytes(array: ByteArray) =
+fun Path.appendBytes(array: ByteArray): Unit =
     this.toFile().appendBytes(array)
 
 /**
  * @See kotlin.io.appendText
  */
-fun Path.appendText(text: String, charset: Charset = Charsets.UTF_8) =
+fun Path.appendText(text: String, charset: Charset = Charsets.UTF_8): Unit =
     this.toFile().appendText(text, charset)
 
-/**
- * @see kotlin.io.bufferedReader
- */
-inline fun Path.bufferedReader(charset: Charset = Charsets.UTF_8, bufferSize: Int = DEFAULT_BUFFER_SIZE) =
-    this.toFile().bufferedReader(charset, bufferSize)
-
-/**
- * @see kotlin.io.bufferedWriter
- */
-inline fun Path.bufferedWriter(charset: Charset = Charsets.UTF_8, bufferSize: Int = DEFAULT_BUFFER_SIZE) =
-    this.toFile().bufferedWriter(charset, bufferSize)
+//
+// we use Files.newBufferedReader/Writer instead of kotlin's bufferedReader/Writer
+//
 
 // TODO there are probably better ways than reusing kotlin copyRecursively
 // which implements kind of an own FileTreeWalker.
@@ -41,19 +34,16 @@ fun Path.copyRecursively(
     target: Path,
     overwrite: Boolean = false,
     onError: (Path, IOException) -> OnErrorAction = { _, exception -> throw exception }
-) = this.toFile().copyRecursively(target.toFile(), overwrite) { file, t -> onError(file.toPath(), t) }
+): Boolean = this.toFile().copyRecursively(target.toFile(), overwrite) { file, t -> onError(file.toPath(), t) }
 
-// TODO shouldn't we use Files.copy? The main difference is, that it would provide CopyOption and not only an overwrite flag.
-/**
- * @see kotlin.io.copyTo
- */
-fun Path.copyTo(target: Path, overwrite: Boolean = false, bufferSize: Int = DEFAULT_BUFFER_SIZE) =
-    this.toFile().copyTo(target.toFile(), overwrite, bufferSize)
+//
+// we use Files.copy instead of kotlin's copyTo
+//
 
 /**
  * @see kotlin.io.deleteRecursively
  */
-fun Path.deleteRecursively() = this.toFile().deleteRecursively()
+fun Path.deleteRecursively(): Boolean = this.toFile().deleteRecursively()
 
 //
 // endsWith is already provided by Path
@@ -62,91 +52,91 @@ fun Path.deleteRecursively() = this.toFile().deleteRecursively()
 /**
  * @see kotlin.io.extension
  */
-val Path.extension get() = this.toFile().extension
+val Path.extension get() : String = this.toFile().extension
 
 /**
  * @see kotlin.io.forEachBlock
  */
-fun Path.forEachBlock(action: (buffer: ByteArray, bytesRead: Int) -> Unit) =
+fun Path.forEachBlock(action: (buffer: ByteArray, bytesRead: Int) -> Unit): Unit =
     this.toFile().forEachBlock(action)
 
 /**
  * @see kotlin.io.forEachBlock
  */
-fun Path.forEachBlock(blockSize: Int, action: (buffer: ByteArray, bytesRead: Int) -> Unit) =
+fun Path.forEachBlock(blockSize: Int, action: (buffer: ByteArray, bytesRead: Int) -> Unit): Unit =
     this.toFile().forEachBlock(blockSize, action)
 
 /**
  * @see kotlin.io.forEachLine
  */
-fun Path.forEachLine(charset: Charset = Charsets.UTF_8, action: (line: String) -> Unit) =
+fun Path.forEachLine(charset: Charset = Charsets.UTF_8, action: (line: String) -> Unit): Unit =
     this.toFile().forEachLine(charset, action)
 
-/**
- * @see kotlin.io.inputStream
- */
-inline fun Path.inputStream() = this.toFile().inputStream()
+//
+// we use Files.newInputStream instead of kotlin's inputStream
+//
 
 /**
  * @see kotlin.io.invariantSeparatorsPath
  */
-val Path.invariantSeparatorsPath get() = this.toFile().invariantSeparatorsPath
+val Path.invariantSeparatorsPath get() : String = this.toFile().invariantSeparatorsPath
 
 /**
  * @see kotlin.io.isRooted
  */
-val Path.isRooted get() = toFile().isRooted
+val Path.isRooted get(): Boolean = toFile().isRooted
 
 /**
  * @see kotlin.io.nameWithoutExtension
  */
-val Path.nameWithoutExtension get() = this.toFile().nameWithoutExtension
+val Path.nameWithoutExtension get(): String = this.toFile().nameWithoutExtension
 
 //
 // normalize is already provided by Path
 //
 
-/**
- * @see kotlin.io.outputStream
- */
-inline fun Path.outputStream() = this.toFile().outputStream()
+//
+// we use Files.newOutputStream instead of kotlin's outputStream
+//
 
 /**
  * @see kotlin.io.printWriter
  */
-inline fun Path.printWriter(charset: Charset = Charsets.UTF_8) =
+inline fun Path.printWriter(charset: Charset = Charsets.UTF_8): PrintWriter =
     this.toFile().printWriter(charset)
 
-/**
- * @see kotlin.io.readBytes
- */
-fun Path.readBytes() = this.toFile().readBytes()
+//
+// we use Files.readAllBytes instead of kotlin's readBytes
+//
 
-/**
- * @see kotlin.io.readLines
- */
-fun Path.readLines() = this.toFile().readLines()
+//
+// we use Files.readAllLines instead of kotlin's readBytes
+//
 
 /**
  * @see kotlin.io.reader
  */
-inline fun Path.reader(charset: Charset = Charsets.UTF_8) = this.toFile().reader(charset)
+inline fun Path.reader(charset: Charset = Charsets.UTF_8): InputStreamReader =
+    this.toFile().reader(charset)
 
 //TODO check if File.relativeTo is the same as Path.relativize
 /**
  * @see kotlin.io.relativeTo
  */
-fun Path.relativeTo(other: Path) = this.toFile().relativeTo(other.toFile())
+fun Path.relativeTo(other: Path): Path =
+    this.toFile().relativeTo(other.toFile()).toPath()
 
 /**
  * @see kotlin.io.relativeToOrNull
  */
-fun Path.relativeToOrNull(other: Path) = this.toFile().relativeToOrNull(other.toFile())
+fun Path.relativeToOrNull(other: Path): Path? =
+    this.toFile().relativeToOrNull(other.toFile())?.toPath()
 
 /**
  * @see kotlin.io.relativeToOrSelf
  */
-fun Path.relativeToOrSelf(other: Path) = this.toFile().relativeToOrSelf(other.toFile())
+fun Path.relativeToOrSelf(other: Path): Path =
+    this.toFile().relativeToOrSelf(other.toFile()).toPath()
 
 //
 // resolve and resolveSibling is already provided by Path
@@ -159,18 +149,18 @@ fun Path.relativeToOrSelf(other: Path) = this.toFile().relativeToOrSelf(other.to
 /**
  * @see kotlin.io.toRelativeString
  */
-fun Path.toRelativeString(base: Path) = this.toFile().toRelativeString(base.toFile())
+fun Path.toRelativeString(base: Path): String =
+    this.toFile().toRelativeString(base.toFile())
 
 /**
  * @see kotlin.io.useLines
  */
-inline fun <T> Path.useLines(charset: Charset = Charsets.UTF_8, block: (Sequence<String>) -> T) =
+inline fun <T> Path.useLines(charset: Charset = Charsets.UTF_8, block: (Sequence<String>) -> T): T =
     this.toFile().useLines(charset, block)
 
-/**
- * @see kotlin.io.writeBytes
- */
-fun Path.writeBytes(array: ByteArray) = this.toFile().writeBytes(array)
+//
+// we use Files.writeByte instead of kotlin's writeByte
+//
 
 /**
  * @see kotlin.io.writeText
