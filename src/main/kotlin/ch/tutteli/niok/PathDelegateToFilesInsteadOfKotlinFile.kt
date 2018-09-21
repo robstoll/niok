@@ -11,13 +11,13 @@ import java.nio.file.Path
 /**
  * @see Files.newBufferedReader
  */
-inline fun Path.bufferedReader(charset: Charset = Charsets.UTF_8, vararg openOptions: OpenOption) =
+inline fun Path.newBufferedReader(charset: Charset = Charsets.UTF_8, vararg openOptions: OpenOption) =
     Files.newBufferedWriter(this, charset, *openOptions)
 
 /**
  * @see Files.newBufferedWriter
  */
-inline fun Path.bufferedWriter(charset: Charset = Charsets.UTF_8, vararg openOptions: OpenOption) =
+inline fun Path.newBufferedWriter(charset: Charset = Charsets.UTF_8, vararg openOptions: OpenOption) =
     Files.newBufferedWriter(this, charset, *openOptions)
 
 /**
@@ -29,28 +29,27 @@ inline fun Path.copyTo(target: Path, vararg copyOptions: CopyOption) =
 /**
  * @see Files.newInputStream
  */
-inline fun Path.inputStream(vararg openOptions: OpenOption) =
+inline fun Path.newInputStream(vararg openOptions: OpenOption) =
     Files.newInputStream(this, *openOptions)
 
 /**
  * @see Files.newOutputStream
  */
-inline fun Path.outputStream(vararg openOptions: OpenOption) =
+inline fun Path.newOutputStream(vararg openOptions: OpenOption) =
     Files.newOutputStream(this, *openOptions)
 
 /**
  * @see Files.readAllBytes
  */
-inline fun Path.readBytes(): ByteArray = Files.readAllBytes(this)
+inline fun Path.readAllBytes(): ByteArray = Files.readAllBytes(this)
 
 /**
  * @see Files.readAllLines
  */
-inline fun Path.readLines(charset: Charset = Charsets.UTF_8) = Files.readAllLines(this, charset)
+inline fun Path.readAllLines(charset: Charset = Charsets.UTF_8) = Files.readAllLines(this, charset)
 
 /**
  * @see Files.write
  */
 inline fun Path.writeBytes(array: ByteArray, vararg openOptions: OpenOption): Path =
     Files.write(this, array, *openOptions)
-
