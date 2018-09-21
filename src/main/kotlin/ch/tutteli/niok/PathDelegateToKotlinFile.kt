@@ -4,6 +4,7 @@ package ch.tutteli.niok
 
 import java.io.IOException
 import java.io.InputStreamReader
+import java.io.OutputStreamWriter
 import java.io.PrintWriter
 import java.nio.charset.Charset
 import java.nio.file.Path
@@ -165,10 +166,10 @@ inline fun <T> Path.useLines(charset: Charset = Charsets.UTF_8, block: (Sequence
 /**
  * @see kotlin.io.writeText
  */
-fun Path.writeText(text: String, charset: Charset = Charsets.UTF_8) =
+fun Path.writeText(text: String, charset: Charset = Charsets.UTF_8): Unit =
     this.toFile().writeText(text, charset)
 
 /**
  * @see kotlin.io.writer
  */
-inline fun Path.writer(charset: Charset = Charsets.UTF_8) = this.toFile().writer(charset)
+inline fun Path.writer(charset: Charset = Charsets.UTF_8): OutputStreamWriter = this.toFile().writer(charset)
