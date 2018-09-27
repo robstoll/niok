@@ -1,7 +1,7 @@
 buildscript {
     ext {
         project.group = 'ch.tutteli.niok'
-        project.version ='0.1.0-SNAPSHOT'
+        project.version ='0.1.0'
         project.description = "API for java.nio.file in a Kotlin idiomatic way"
 
         // project setup
@@ -62,7 +62,7 @@ dependencies {
 
 Release & deploy a commit
 --------------------------------
-1. change version in build.gradle to X.Y.Z
+1. change project.version in build.gradle to X.Y.Z
 2. update master:
     a) point to the tag
         1) search for `branch=master` and replace it with `tag=vX.Y.Z` (build status and coverage in README.md)
