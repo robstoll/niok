@@ -1,7 +1,7 @@
 buildscript {
     project.version ='0.1.0-SNAPSHOT'
     ext {
-        kotlin_version = '1.2.61'
+        kotlin_version = '1.2.71'
 
         //testing
         junit_platform_version = '1.2.0'
