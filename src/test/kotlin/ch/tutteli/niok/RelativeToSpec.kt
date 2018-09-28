@@ -5,7 +5,6 @@ import ch.tutteli.atrium.assert
 import ch.tutteli.spek.extensions.TempFolder
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
-import java.io.File
 import java.nio.file.Paths
 
 class RelativeToSpec : Spek({
@@ -13,14 +12,25 @@ class RelativeToSpec : Spek({
     registerListener(tempFolder)
 
     describe("compare Kotlin's File.relativeTo with Path.relativize") {
-        val s = File.separator
-        listOf(
-            listOf("a", "a", "", ""),
-            listOf("a", "b", "..${s}a", "..${s}b"),
-            //Bug in JDK due to https://bugs.java.com/bugdatabase/view_bug.do?bug_id=9057443
-            //listOf(".${s}a", "b", "..${s}a", "..$s.${s}b"),
-            listOf("a", ".${s}b", "..${s}a", "..$s.${s}b")
-        ).forEach { (stringPath1, stringPath2, expectRelativeTo, expectRelativize) ->
+        val list = if (System.getProperty("os.name").startsWith("Windows")) {
+            listOf(
+                listOf("a", "a", "", ""),
+                listOf("a", "b", "..\\a", "..\\b"),
+                //Bug in JDK due to https://bugs.java.com/bugdatabase/view_bug.do?bug_id=9057443
+                //listOf(".\\a", "b", "..\\a", "..$s.\\b"),
+                listOf("a", ".\\b", "..\\a", "..\\.\\b")
+
+            )
+        } else {
+            listOf(
+                listOf("a", "a", "", ""),
+                listOf("a", "b", "../a", "../b"),
+                listOf("./a", "b", "../a", "../b"),
+                listOf("a", "./b", "../a", "../b")
+
+            )
+        }
+        list.forEach { (stringPath1, stringPath2, expectRelativeTo, expectRelativize) ->
             action("path1: $stringPath1, path2: $stringPath2 -> relativeTo: $expectRelativeTo, relativize: $expectRelativize") {
                 val path1 = tempFolder.newFile(stringPath1)
                 val path2 = if (stringPath1 != stringPath2) {
