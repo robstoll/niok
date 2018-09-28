@@ -4,12 +4,19 @@ jdk:
   - oraclejdk8
   - oraclejdk9
 
+addons:
+    sonarcloud:
+        organization: "robstoll-github"
+        token:
+            secure: $SONAR_TOKEN
+
 before_install:
  - chmod +x gr
 install: true
 
 script:
   - ./gr -i build
+  - sonar-scanner
 
 before_cache:
     - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
