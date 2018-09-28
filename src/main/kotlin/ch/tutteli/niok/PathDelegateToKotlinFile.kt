@@ -124,14 +124,16 @@ inline fun Path.reader(charset: Charset = Charsets.UTF_8): InputStreamReader =
  * This function calculates the relative path from this path to [other] where [Path.relativize] calculates the relative
  * path from [other] to this path.
  * However, `other.relativeTo(this)` is not necessarily the same as `this.relativize(other)`. There are small subtleties
- * when it comes to `../` and `./` in one of the paths. Following an example:
+ * when it comes to `../` and `./` in one of the paths and depending on the JVM in use. Following an example using
+ * Oracle's JDK8
  * ```
  * val a = Paths.get("a")
  * val b = Paths.get("./b")
  * a.relativeTo(b) // ../a
  * b.relativize(a) // .././a
  * ```
- * Notice further, that [Path.relativize] seems to contain a bug when this path contains `./`. Following an example
+ * Notice further, that [Path.relativize] seems to contain a bug (in Oracle's JDK8, seems to be fixed in JDK 9)
+ * when this path contains `./`. Following an example
  * ```
  * Paths.get("./a").relativize(Paths.get("b")) // results in ../../b instead of ../b (or .././b)
  * ```

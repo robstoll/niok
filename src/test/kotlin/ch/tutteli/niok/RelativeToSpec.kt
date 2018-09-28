@@ -5,6 +5,7 @@ import ch.tutteli.atrium.assert
 import ch.tutteli.spek.extensions.TempFolder
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
+import java.io.File
 import java.nio.file.Paths
 
 class RelativeToSpec : Spek({
@@ -12,21 +13,23 @@ class RelativeToSpec : Spek({
     registerListener(tempFolder)
 
     describe("compare Kotlin's File.relativeTo with Path.relativize") {
-        val list = if (System.getProperty("os.name").startsWith("Windows")) {
+        val s = File.separator
+        println(System.getProperty("java.version"))
+        val list = if (System.getProperty("java.version").startsWith("1.8")) {
             listOf(
                 listOf("a", "a", "", ""),
-                listOf("a", "b", "..\\a", "..\\b"),
+                listOf("a", "b", "..${s}a", "..${s}b"),
                 //Bug in JDK due to https://bugs.java.com/bugdatabase/view_bug.do?bug_id=9057443
-                //listOf(".\\a", "b", "..\\a", "..$s.\\b"),
-                listOf("a", ".\\b", "..\\a", "..\\.\\b")
+                //listOf(".${s}a", "b", "..${s}a", "..$s.${s}b"),
+                listOf("a", ".${s}b", "..${s}a", "..$s.${s}b")
 
             )
         } else {
             listOf(
                 listOf("a", "a", "", ""),
-                listOf("a", "b", "../a", "../b"),
-                listOf("./a", "b", "../a", "../b"),
-                listOf("a", "./b", "../a", "../b")
+                listOf("a", "b", "..${s}a", "..${s}b"),
+                listOf(".${s}a", "b", "..${s}a", "..$s${s}b"),
+                listOf("a", ".${s}b", "..${s}a", "..$s${s}b")
 
             )
         }
