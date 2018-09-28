@@ -16,7 +16,7 @@ install: true
 
 script:
   - ./gr -i build
-  - sonar-scanner
+  - sonar-scanner -Dsonar.projectKey=robstoll_niok -Dsonar.sources=src
 
 before_cache:
     - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -26,3 +26,4 @@ cache:
   directories:
     - $HOME/.gradle/wrapper/
     - $HOME/.gradle/caches/
+    - $HOME/.sonar/cache
