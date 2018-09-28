@@ -9,150 +9,150 @@ import java.nio.file.*
 import java.nio.file.attribute.*
 
 /**
- * @see Files.copy with overload for [OutputStream].
+ * Delegates to [Files.copy] with overload for [OutputStream].
  */
 inline fun Path.copyTo(outputStream: OutputStream): Long = Files.copy(this, outputStream)
 
 /**
- * @see Files.createDirectory
+ * Delegates to [Files.createDirectory].
  */
 inline fun Path.createDirectory(vararg fileAttributes: FileAttribute<*>): Path =
     Files.createDirectory(this, *fileAttributes)
 
 /**
- * @see Files.createDirectories
+ * Delegates to [Files.createDirectories].
  */
 inline fun Path.createDirectories(vararg fileAttributes: FileAttribute<*>): Path =
     Files.createDirectories(this, *fileAttributes)
 
 /**
- * @see Files.createFile
+ * Delegates to [Files.createFile].
  */
 inline fun Path.createFile(vararg fileAttributes: FileAttribute<*>): Path =
     Files.createFile(this, *fileAttributes)
 
 /**
  * Creates a new link (directory entry) for this [Path].
- * @see Files.createLink
+ * Delegates to [Files.createLink].
  */
 inline fun Path.createLink(link: Path): Path = Files.createLink(link, this)
 
 /**
  * Creates a symbolic link for this [Path].
- * @see Files.createDirectory
+ * Delegates to [Files.createDirectory].
  */
 inline fun Path.createSymbolicLink(link: Path, vararg fileAttributes: FileAttribute<*>): Path =
     Files.createSymbolicLink(link, this, *fileAttributes)
 
 /**
- * @see Files.delete
+ * Delegates to [Files.delete].
  */
 inline fun Path.delete(): Unit = Files.delete(this)
 
 /**
- * @see Files.deleteIfExists
+ * Delegates to [Files.deleteIfExists].
  */
 inline fun Path.deleteIfExists(): Boolean = Files.deleteIfExists(this)
 
 /**
- * @see Files.exists
+ * Delegates to [Files.exists].
  */
 inline val Path.exists get(): Boolean = Files.exists(this)
 
 /**
- * @see Files.isDirectory without [LinkOption]s.
+ * Delegates to [Files.isDirectory] without [LinkOption]s.
  */
 inline val Path.isDirectory get(): Boolean = Files.isDirectory(this)
 
 /**
- * @see Files.isDirectory
+ * Delegates to [Files.isDirectory].
  */
 inline fun Path.isDirectory(linkOption: LinkOption, vararg furtherLinkOptions: LinkOption): Boolean =
     Files.isDirectory(this, linkOption, *furtherLinkOptions)
 
 /**
- * @see Files.isExecutable
+ * Delegates to [Files.isExecutable].
  */
 inline val Path.isExecutable get(): Boolean = Files.isExecutable(this)
 
 /**
- * @see Files.isHidden
+ * Delegates to [Files.isHidden].
  */
 inline val Path.isHidden get(): Boolean = Files.isHidden(this)
 
 /**
- * @see Files.isReadable
+ * Delegates to [Files.isReadable].
  */
 inline val Path.isReadable get(): Boolean = Files.isReadable(this)
 
 /**
- * @see Files.isRegularFile without [LinkOption]s
+ * Delegates to [Files.isRegularFile] without [LinkOption]s
  */
 inline val Path.isRegularFile get(): Boolean = Files.isRegularFile(this)
 
 /**
- * @see Files.isRegularFile
+ * Delegates to [Files.isRegularFile].
  */
 inline fun Path.isRegularFile(linkOption: LinkOption, vararg furtherLinkOptions: LinkOption): Boolean =
     Files.isRegularFile(this, linkOption, *furtherLinkOptions)
 
 /**
- * @see Files.isSameFile
+ * Delegates to [Files.isSameFile].
  */
 inline fun Path.isSameFile(other: Path): Boolean = Files.isSameFile(this, other)
 
 /**
- * @see Files.isSymbolicLink
+ * Delegates to [Files.isSymbolicLink].
  */
 inline val Path.isSymbolicLink get(): Boolean = Files.isSymbolicLink(this)
 
 /**
- * @see Files.isWritable
+ * Delegates to [Files.isWritable].
  */
 inline val Path.isWritable get(): Boolean = Files.isWritable(this)
 
 /**
- * @see Files.getFileStore
+ * Delegates to [Files.getFileStore].
  */
 inline val Path.fileStore get(): FileStore = Files.getFileStore(this)
 
 /**
- * @see Files.getAttribute
+ * Delegates to [Files.getAttribute].
  */
 inline fun Path.getAttribute(attribute: String, vararg linkOptions: LinkOption): Any =
     Files.getAttribute(this, attribute, *linkOptions)
 
 /**
- * @see Files.getFileAttributeView
+ * Delegates to [Files.getFileAttributeView].
  */
 inline fun <reified V : FileAttributeView> Path.getFileAttributeView(vararg linkOptions: LinkOption): V =
     Files.getFileAttributeView(this, V::class.java, *linkOptions)
 
 /**
- * @see Files.getLastModifiedTime without [LinkOption]s.
+ * Delegates to [Files.getLastModifiedTime] without [LinkOption]s.
  */
 inline val Path.lastModifiedTime get(): FileTime = Files.getLastModifiedTime(this)
 
 /**
- * @see Files.getLastModifiedTime
+ * Delegates to [Files.getLastModifiedTime].
  */
 inline fun Path.lastModifiedTime(linkOption: LinkOption, vararg furtherLinkOptions: LinkOption): FileTime =
     Files.getLastModifiedTime(this, linkOption, *furtherLinkOptions)
 
 /**
- * @see Files.move
+ * Delegates to [Files.move].
  */
 inline fun Path.move(target: Path, vararg copyOptions: CopyOption): Path =
     Files.move(this, target, *copyOptions)
 
 /**
- * @see Files.newByteChannel
+ * Delegates to [Files.newByteChannel].
  */
 inline fun Path.newByteChannel(vararg openOptions: OpenOption): SeekableByteChannel =
     Files.newByteChannel(this, *openOptions)
 
 /**
- * @see Files.newByteChannel
+ * Delegates to [Files.newByteChannel].
  */
 inline fun Path.newByteChannel(
     openOptions: Set<OpenOption>,
@@ -160,84 +160,84 @@ inline fun Path.newByteChannel(
 ): SeekableByteChannel = Files.newByteChannel(this, openOptions, *fileAttributes)
 
 /**
- * @see Files.notExists without [LinkOption]s.
+ * Delegates to [Files.notExists] without [LinkOption]s.
  */
 inline val Path.notExists get(): Boolean = Files.notExists(this)
 
 /**
- * @see Files.notExists
+ * Delegates to [Files.notExists].
  */
 inline fun Path.notExists(linkOption: LinkOption, vararg furtherLinkOptions: LinkOption): Boolean =
     Files.notExists(this, linkOption, *furtherLinkOptions)
 
 /**
- * @see Files.getPosixFilePermissions without [LinkOption]s
+ * Delegates to [Files.getPosixFilePermissions] without [LinkOption]s
  */
 inline val Path.posixFilePersmissions get(): Set<PosixFilePermission> = Files.getPosixFilePermissions(this)
 
 /**
- * @see Files.getPosixFilePermissions
+ * Delegates to [Files.getPosixFilePermissions].
  */
 inline fun Path.posixFilePersmissions(linkOption: LinkOption, vararg furtherLinkOptions: LinkOption) =
     Files.getPosixFilePermissions(this, linkOption, *furtherLinkOptions)
 
 /**
- * @see Files.probeContentType
+ * Delegates to [Files.probeContentType].
  */
 inline fun Path.probeContentType(): String = Files.probeContentType(this)
 
 /**
- * @see Files.getLastModifiedTime without [LinkOption]s.
+ * Delegates to [Files.getLastModifiedTime] without [LinkOption]s.
  */
 inline val Path.owner get(): UserPrincipal = Files.getOwner(this)
 
 /**
- * @see Files.getLastModifiedTime
+ * Delegates to [Files.getLastModifiedTime].
  */
 inline fun Path.owner(linkOption: LinkOption, vararg furtherLinkOptions: LinkOption): UserPrincipal =
     Files.getOwner(this, linkOption, *furtherLinkOptions)
 
 
 /**
- * @see Files.readAttributes
+ * Delegates to [Files.readAttributes].
  */
 inline fun <reified A : BasicFileAttributes> Path.readAttributes(vararg linkOptions: LinkOption): A =
     Files.readAttributes(this, A::class.java, *linkOptions)
 
 /**
- * @see Files.readAttributes
+ * Delegates to [Files.readAttributes].
  */
 inline fun Path.readAttributes(attributes: String, vararg linkOptions: LinkOption): Map<String, Any> =
     Files.readAttributes(this, attributes, *linkOptions)
 
 /**
- * @see Files.readSymbolicLink
+ * Delegates to [Files.readSymbolicLink].
  */
 inline fun Path.readSymbolicLink() = Files.readSymbolicLink(this)
 
 /**
- * @see Files.setAttribute
+ * Delegates to [Files.setAttribute].
  */
 inline fun Path.setAttribute(attribute: String, value: Any, vararg linkOptions: LinkOption) =
     Files.setAttribute(this, attribute, value, *linkOptions)
 
 /**
- * @see Files.setLastModifiedTime
+ * Delegates to [Files.setLastModifiedTime].
  */
 inline fun Path.setLastModifiedTime(fileTime: FileTime) = Files.setLastModifiedTime(this, fileTime)
 
 /**
- * @see Files.setPosixFilePermissions
+ * Delegates to [Files.setPosixFilePermissions].
  */
 inline fun Path.setPosixFilePermissions(perms: Set<PosixFilePermission>) = Files.setPosixFilePermissions(this, perms)
 
 /**
- * @see Files.size
+ * Delegates to [Files.size].
  */
 inline val Path.size get(): Long = Files.size(this)
 
 /**
- * @see Files.write
+ * Delegates to [Files.write].
  */
 inline fun Path.writeLines(
     lines: Iterable<CharSequence>,
