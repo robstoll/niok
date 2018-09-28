@@ -117,9 +117,27 @@ inline fun Path.printWriter(charset: Charset = Charsets.UTF_8): PrintWriter =
 inline fun Path.reader(charset: Charset = Charsets.UTF_8): InputStreamReader =
     this.toFile().reader(charset)
 
-//TODO check if File.relativeTo is the same as Path.relativize
 /**
- * @see kotlin.io.relativeTo
+ * Delegates to [kotlin.io.relativeToOrNull].
+ *
+ * Notice, that this function is not equivalent to [Path.relativize].
+ * This function calculates the relative path from this path to [other] where [Path.relativize] calculates the relative
+ * path from [other] to this path.
+ * However, `other.relativeTo(this)` is not necessarily the same as `this.relativize(other)`. There are small subtleties
+ * when it comes to `../` and `./` in one of the paths. Following an example:
+ * ```
+ * val a = Paths.get("a")
+ * val b = Paths.get("./b")
+ * a.relativeTo(b) // ../a
+ * b.relativize(a) // .././a
+ * ```
+ * Notice further, that [Path.relativize] seems to contain a bug when this path contains `./`. Following an example
+ * ```
+ * Paths.get("./a").relativize(Paths.get("b")) // results in ../../b instead of ../b (or .././b)
+ * ```
+ * See https://bugs.java.com/bugdatabase/view_bug.do?bug_id=9057443 for further information.
+ * Hence, in case you want to use the result in [Path.resolve] later on,
+ * then you should prefer [Path.relativeTo] over [Path.relativize].
  */
 fun Path.relativeTo(other: Path): Path =
     this.toFile().relativeTo(other.toFile()).toPath()
