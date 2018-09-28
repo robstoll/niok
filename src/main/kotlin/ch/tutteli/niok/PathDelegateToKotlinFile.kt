@@ -25,9 +25,6 @@ fun Path.appendText(text: String, charset: Charset = Charsets.UTF_8): Unit =
 // we use Files.newBufferedReader/Writer instead of kotlin's bufferedReader/Writer
 //
 
-// TODO there are probably better ways than reusing kotlin copyRecursively
-// which implements kind of an own FileTreeWalker.
-// On the other hand we can be sure it behaves the same way
 /**
  * @see kotlin.io.copyRecursively
  */
