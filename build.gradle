@@ -5,7 +5,7 @@ buildscript {
 
     ext {
         // project setup
-        tutteli_gradle_version = '0.13.6'
+        tutteli_gradle_version = '0.13.8'
         github_user = 'robstoll'
 
         // main
