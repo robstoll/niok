@@ -1,6 +1,6 @@
 buildscript {
     project.group = 'ch.tutteli.niok'
-    project.version ='0.2.0-SNAPSHOT'
+    project.version ='0.2.0'
     project.description = "API for java.nio.file in a Kotlin idiomatic way"
 
     ext {
@@ -72,7 +72,7 @@ Release & deploy a commit
     a) point to the tag
         1) search for `branch=master` and replace it with `tag=vX.Y.Z` (build status and coverage in README.md)
         2) search for `tree/master` and replace it with `tree/vX.Y.Z` (README.md)
-    b) commit (modified build.gradle, README.md)
+    b) commit (modified .travis.yml, build.gradle and README.md)
     c) git tag vX.Y.Z
     d) git push origin vX.Y.Z
 4. deploy to bintray:
