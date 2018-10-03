@@ -9,7 +9,7 @@ import java.io.File
 import java.nio.file.Paths
 
 class RelativeToSpec : Spek({
-    val tempFolder = TempFolder.perAction() //or perAction() or perGroup()
+    val tempFolder = TempFolder.perAction()
     registerListener(tempFolder)
 
     describe("compare Kotlin's File.relativeTo with Path.relativize") {
