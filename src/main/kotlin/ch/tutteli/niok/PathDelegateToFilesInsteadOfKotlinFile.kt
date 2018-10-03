@@ -53,6 +53,12 @@ inline fun Path.readAllBytes(): ByteArray = Files.readAllBytes(this)
 inline fun Path.readAllLines(charset: Charset = Charsets.UTF_8): List<String> = Files.readAllLines(this, charset)
 
 /**
+ * Converts [Path.readAllBytes] to a string using the given [charset]
+ */
+inline fun Path.readText(charset: Charset = Charsets.UTF_8): String =
+    readAllBytes().toString(charset)
+
+/**
  * Delegates to [Files.write].
  */
 inline fun Path.writeBytes(array: ByteArray, vararg openOptions: OpenOption): Path =

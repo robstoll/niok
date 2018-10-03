@@ -111,6 +111,10 @@ inline fun Path.printWriter(charset: Charset = Charsets.UTF_8): PrintWriter =
 // we use Files.readAllLines instead of kotlin's readBytes
 //
 
+//
+// we implement own readText method based on Files.readAllBytes()
+//
+
 /**
  * Delegates to [kotlin.io.reader].
  */
