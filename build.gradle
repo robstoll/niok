@@ -51,6 +51,7 @@ apply plugin: 'ch.tutteli.publish'
 publish {
     githubUser = github_user
     bintrayRepo = 'tutteli-jars'
+    manifestVendor = 'tutteli.ch'
 }
 
 dependencies {
