@@ -58,7 +58,6 @@ dependencies {
     compile kotlinStdlib()
     compile kotlinReflect(), withoutKotlin
     testCompile("ch.tutteli.atrium:atrium-cc-en_GB-robstoll:$atrium_version") {
-        exclude group: 'org.junit.platform'
         exclude module: 'atrium-verbs'
     }
     testCompile "com.nhaarman:mockito-kotlin:$mockito_kotlin_version", withoutKotlin
