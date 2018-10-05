@@ -5,8 +5,7 @@ buildscript {
 
     ext {
         // project setup
-        tutteli_gradle_version = '0.14.1'
-        github_user = 'robstoll'
+        tutteli_gradle_version = '0.15.1'
 
         // main
         kotlin_version = '1.2.71'
@@ -40,7 +39,6 @@ repositories {
 apply plugin: 'kotlin'
 
 apply plugin: 'ch.tutteli.dokka'
-tutteliDokka.githubUser = github_user
 
 apply plugin: 'ch.tutteli.spek'
 
@@ -48,19 +46,15 @@ apply plugin: 'ch.tutteli.kotlin.utils'
 kotlinutils.kotlinVersion = kotlin_version
 
 apply plugin: 'ch.tutteli.publish'
-publish {
-    githubUser = github_user
-    bintrayRepo = 'tutteli-jars'
-    manifestVendor = 'tutteli.ch'
-}
 
 dependencies {
     compile kotlinStdlib()
-    compile kotlinReflect(), withoutKotlin
-    testCompile("ch.tutteli.atrium:atrium-cc-en_GB-robstoll:$atrium_version") {
-        exclude module: 'atrium-verbs'
+    compile kotlinReflect()
+    testCompile "ch.tutteli.atrium:atrium-cc-en_GB-robstoll:$atrium_version", excluding {
+        atriumVerbs()
+        kotlin()
     }
-    testCompile "com.nhaarman:mockito-kotlin:$mockito_kotlin_version", withoutKotlin
+    testCompile "com.nhaarman:mockito-kotlin:$mockito_kotlin_version", excludeKotlin
     testCompile "ch.tutteli:tutteli-spek-extensions:$tutteli_spek_extensions"
 }
 /*
