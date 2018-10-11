@@ -86,7 +86,7 @@ inline val Path.isHidden get(): Boolean = Files.isHidden(this)
 inline val Path.isReadable get(): Boolean = Files.isReadable(this)
 
 /**
- * Delegates to [Files.isRegularFile] without [LinkOption]s
+ * Delegates to [Files.isRegularFile] without [LinkOption]s.
  */
 inline val Path.isRegularFile get(): Boolean = Files.isRegularFile(this)
 
@@ -171,7 +171,7 @@ inline fun Path.notExists(linkOption: LinkOption, vararg furtherLinkOptions: Lin
     Files.notExists(this, linkOption, *furtherLinkOptions)
 
 /**
- * Delegates to [Files.getPosixFilePermissions] without [LinkOption]s
+ * Delegates to [Files.getPosixFilePermissions] without [LinkOption]s.
  */
 inline val Path.posixFilePersmissions get(): Set<PosixFilePermission> = Files.getPosixFilePermissions(this)
 

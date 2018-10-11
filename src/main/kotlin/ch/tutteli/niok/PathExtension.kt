@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package ch.tutteli.niok
 
 import java.nio.file.Path
@@ -21,5 +23,5 @@ val Path.fileNameAsString get() = fileName.toString()
  *
  * @return The new resolved [Path].
  */
-fun Path.resolve(dir: String, first: String, vararg more: String): Path =
+inline fun Path.resolve(dir: String, first: String, vararg more: String): Path =
     resolve(Paths.get(dir, first, *more))
