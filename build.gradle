@@ -15,6 +15,9 @@ buildscript {
         atrium_version = '0.7.0'
         mockito_kotlin_version = '1.6.0'
         tutteli_spek_extensions = '0.3.0'
+
+        // detekt/sonarcloud
+        detekt_version = '1.0.0.RC8'
     }
 
     repositories {
@@ -29,10 +32,12 @@ buildscript {
         classpath "ch.tutteli:tutteli-gradle-kotlin-utils:$tutteli_gradle_version"
         classpath "ch.tutteli:tutteli-gradle-publish:$tutteli_gradle_version"
         classpath "ch.tutteli:tutteli-gradle-spek:$tutteli_gradle_version"
+        classpath "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
     }
 }
 
 repositories {
+    mavenCentral()
     maven { url "http://dl.bintray.com/robstoll/tutteli-jars" }
 }
 
@@ -46,6 +51,16 @@ apply plugin: 'ch.tutteli.kotlin.utils'
 kotlinutils.kotlinVersion = kotlin_version
 
 apply plugin: 'ch.tutteli.publish'
+
+apply plugin: "io.gitlab.arturbosch.detekt"
+detekt {
+    version = detekt_version
+    defaultProfile {
+        filters = ".*/resources/.*,.*$rootProject.name/.*/build/.*"
+        output = "$rootProject.buildDir/detekt"
+        config = file("$rootProject.projectDir/gradle/scripts/detekt.yml")
+    }
+}
 
 dependencies {
     compile kotlinStdlib()
@@ -61,7 +76,7 @@ dependencies {
 
 Release & deploy a commit
 --------------------------------
-1. search for X.Y.Z-SNAPSHOT and replace with X.Y.Z
+    1. search for X.Y.Z-SNAPSHOT and replace with X.Y.Z
 2. update master:
     a) point to the tag
         1) search for `branch=master` and replace it with `tag=vX.Y.Z` (build status and coverage in README.md)
@@ -79,7 +94,7 @@ Prepare next dev cycle
 1. point to master
    a) search for `tag=vX.Y.Z` and replace it with `branch=master`
    b) search for `tree/vX.Y.Z` and replace it with `tree/master`
-2. change version in build.gradle to X.Y.Z-SNAPSHOT
+2. search for X.Y.Z and replace with X.Y.Z-SNAPSHOT
 3. commit & push changes
 
 */
