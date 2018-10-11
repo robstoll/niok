@@ -14,6 +14,10 @@ before_install:
  - chmod +x gr
 install: true
 
+# -Dsonar.coverage.jacoco.xmlReportPaths=build/reports/jacoco/report.xml
+# Unfortunately not yet ready, see:
+# https://community.sonarsource.com/t/sonar-kotlin-coverage-fails-due-to-line-is-out-of-range-errors/3201/4
+
 script:
   - ./gr -i build
   - |
@@ -21,8 +25,7 @@ script:
           sonar-scanner \
               -Dsonar.projectKey=robstoll_niok \
               -Dsonar.sources=src \
-              -Dsonar.projectVersion=0.2.0 \
-              -Dsonar.coverage.jacoco.xmlReportPaths=build/reports/jacoco/report.xml
+              -Dsonar.projectVersion=0.2.0
       fi
 
 before_cache:
