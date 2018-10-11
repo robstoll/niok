@@ -25,7 +25,7 @@ script:
           sonar-scanner \
               -Dsonar.projectKey=robstoll_niok \
               -Dsonar.sources=src \
-              -Dsonar.projectVersion=0.2.0
+              -Dsonar.projectVersion=0.3.0-SNAPSHOT
       fi
 
 before_cache:

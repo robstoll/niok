@@ -1,6 +1,6 @@
 buildscript {
     project.group = 'ch.tutteli.niok'
-    project.version ='0.2.0'
+    project.version ='0.3.0-SNAPSHOT'
     project.description = "API for java.nio.file in a Kotlin idiomatic way"
 
     ext {
@@ -76,10 +76,10 @@ Release & deploy a commit
 
 Prepare next dev cycle
 -----------------------
-1. change version in build.gradle to X.Y.Z-SNAPSHOT
-2. point to master
+1. point to master
    a) search for `tag=vX.Y.Z` and replace it with `branch=master`
    b) search for `tree/vX.Y.Z` and replace it with `tree/master`
+2. change version in build.gradle to X.Y.Z-SNAPSHOT
 3. commit & push changes
 
 */
