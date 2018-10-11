@@ -29,14 +29,18 @@ complexity:
     LongParameterList:
         threshold: 7
     TooManyFunctions:
-        ignorePrivate: true
-
-potential-bugs:
-    UnsafeCast:
         active: false
 
 naming:
     MatchingDeclarationName:
+        active: false
+
+performance:
+    SpreadOperator:
+        active: false
+
+potential-bugs:
+    UnsafeCast:
         active: false
 
 style:
