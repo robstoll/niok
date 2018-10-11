@@ -10,7 +10,7 @@ import org.jetbrains.spek.api.dsl.it
 import java.io.File
 import java.nio.file.Paths
 
-class AbsolutePathAsStringSpec : Spek({
+object AbsolutePathAsStringSpec : Spek({
     val tempFolder = TempFolder.perTest()
     registerListener(tempFolder)
 

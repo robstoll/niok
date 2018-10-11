@@ -8,7 +8,7 @@ import org.jetbrains.spek.api.dsl.describe
 import java.io.File
 import java.nio.file.Paths
 
-class RelativeToSpec : Spek({
+object RelativeToSpec : Spek({
     val tempFolder = TempFolder.perAction()
     registerListener(tempFolder)
 
