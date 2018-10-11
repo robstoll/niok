@@ -13,7 +13,7 @@ buildscript {
         // test
         junit_platform_version = '1.2.0'
         atrium_version = '0.7.0'
-        mockito_kotlin_version = '1.5.0'
+        mockito_kotlin_version = '1.6.0'
         tutteli_spek_extensions = '0.3.0'
     }
 
