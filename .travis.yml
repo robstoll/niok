@@ -19,7 +19,9 @@ install: true
 # https://community.sonarsource.com/t/sonar-kotlin-coverage-fails-due-to-line-is-out-of-range-errors/3201/4
 
 script:
-  - ./gr -i build
+  - ./gr -i build detektCheck
+
+after_success:
   - |
       if [ $TRAVIS_JDK_VERSION == oraclejdk8 ]; then
           sonar-scanner \
