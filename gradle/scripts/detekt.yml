@@ -35,6 +35,10 @@ potential-bugs:
     UnsafeCast:
         active: false
 
+naming:
+    MatchingDeclarationName:
+        active: false
+
 style:
     DataClassContainsFunctions:
         active: false
