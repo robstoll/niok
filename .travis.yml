@@ -20,10 +20,8 @@ install: true
 
 script:
   - ./gr -i build detektCheck
-
-after_success:
   - |
-      if [ $TRAVIS_JDK_VERSION == oraclejdk8 ]; then
+      if [ "$TRAVIS_TEST_RESULT" == 0 ] && [ "$TRAVIS_JDK_VERSION" == oraclejdk8 ]; then
           sonar-scanner \
               -Dsonar.projectVersion=0.3.0-SNAPSHOT \
               -Dsonar.projectKey=robstoll_niok \
