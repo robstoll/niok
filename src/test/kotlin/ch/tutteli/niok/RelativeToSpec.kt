@@ -1,7 +1,7 @@
 package ch.tutteli.niok
 
 import ch.tutteli.atrium.api.cc.en_GB.toBe
-import ch.tutteli.atrium.assert
+import ch.tutteli.atrium.verbs.expect
 import ch.tutteli.spek.extensions.TempFolder
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
@@ -43,18 +43,18 @@ object RelativeToSpec : Spek({
                 }
                 val resultRelativeTo = path1.relativeTo(path2)
                 test("relativeTo which delegates to Kotlin's File.relativeTo") {
-                    assert(resultRelativeTo).toBe(Paths.get(expectRelativeTo))
+                    expect(resultRelativeTo).toBe(Paths.get(expectRelativeTo))
                 }
                 test("path2.resolve(Path.relativeTo).normalize() = path1.normalize()") {
-                    assert(path2.resolve(resultRelativeTo).normalize()).toBe(path1.normalize())
+                    expect(path2.resolve(resultRelativeTo).normalize()).toBe(path1.normalize())
                 }
 
                 val resultRelativize = path1.relativize(path2)
                 test("Path.relativize") {
-                    assert(resultRelativize).toBe(Paths.get(expectRelativize))
+                    expect(resultRelativize).toBe(Paths.get(expectRelativize))
                 }
                 test("path1.resolve(Path.relativize).normalize() = path2.normalize()") {
-                    assert(path1.resolve(resultRelativize).normalize()).toBe(path2.normalize())
+                    expect(path1.resolve(resultRelativize).normalize()).toBe(path2.normalize())
                 }
             }
         }
