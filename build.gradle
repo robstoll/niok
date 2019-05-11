@@ -13,7 +13,6 @@ buildscript {
         // test
         junit_platform_version = '1.2.0'
         atrium_version = '0.8.0'
-        mockito_kotlin_version = '2.1.0'
         tutteli_spek_extensions = '0.3.0'
 
         // detekt/sonarcloud
@@ -64,7 +63,6 @@ dependencies {
     compile kotlinStdlib()
     compile kotlinReflect()
     testCompile "ch.tutteli.atrium:atrium-cc-en_GB-robstoll:$atrium_version", excludeKotlin
-    testCompile "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version", excludeKotlin
     testCompile "ch.tutteli:tutteli-spek-extensions:$tutteli_spek_extensions"
 }
 /*
