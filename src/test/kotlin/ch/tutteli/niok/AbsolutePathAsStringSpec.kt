@@ -4,9 +4,8 @@ import ch.tutteli.atrium.api.cc.en_GB.contains
 import ch.tutteli.atrium.api.cc.en_GB.toBe
 import ch.tutteli.atrium.verbs.expect
 import ch.tutteli.spek.extensions.TempFolder
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.given
-import org.jetbrains.spek.api.dsl.it
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 import java.io.File
 import java.nio.file.Paths
 
@@ -16,14 +15,14 @@ object AbsolutePathAsStringSpec : Spek({
 
     val sep = File.separatorChar
 
-    given("absolute path") {
+    describe("absolute path") {
         it("returns the whole path") {
             val path = tempFolder.newFile("test")
             expect(path.absolutePathAsString).toBe(path.toFile().absolutePath)
         }
     }
 
-    given("absolute path with ./ in it") {
+    describe("absolute path with ./ in it") {
         it("returns the whole path with ./ in it") {
             val path = tempFolder.newFile("./test")
             expect(path.absolutePathAsString) {
@@ -33,7 +32,7 @@ object AbsolutePathAsStringSpec : Spek({
         }
     }
 
-    given("absolute path with ../ in it") {
+    describe("absolute path with ../ in it") {
         it("returns the whole path with ../ in it") {
             val tmpDirName = tempFolder.tmpDir.fileNameAsString
             val path = tempFolder.newFile("../$tmpDirName/test")
@@ -44,14 +43,14 @@ object AbsolutePathAsStringSpec : Spek({
         }
     }
 
-    given("relative path") {
+    describe("relative path") {
         it("returns the whole path") {
             val path = Paths.get("test")
             expect(path.absolutePathAsString).toBe(File("test").absolutePath)
         }
     }
 
-    given("relative path with ./") {
+    describe("relative path with ./") {
         it("returns the whole path with ./") {
             val path = Paths.get("./test")
             expect(path.absolutePathAsString) {
@@ -61,7 +60,7 @@ object AbsolutePathAsStringSpec : Spek({
         }
     }
 
-    given("relative path with ../ in it") {
+    describe("relative path with ../ in it") {
         it("returns the whole path with ../ in it") {
             val path = Paths.get("../test")
             expect(path.absolutePathAsString) {

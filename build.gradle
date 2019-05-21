@@ -13,7 +13,7 @@ buildscript {
         // test
         junit_platform_version = '1.2.0'
         atrium_version = '0.8.0'
-        tutteli_spek_extensions = '0.3.0'
+        tutteli_spek_extensions = '0.4.1'
 
         // detekt/sonarcloud
         detekt_version = '1.0.0.RC8'
@@ -38,12 +38,12 @@ buildscript {
 repositories {
     mavenCentral()
     jcenter()
+    maven { url  "https://dl.bintray.com/robstoll/tutteli-jars" }
 }
 
 apply plugin: 'kotlin'
 apply plugin: 'ch.tutteli.dokka'
 apply plugin: 'ch.tutteli.spek'
-spek.version='1.1.5'
 
 apply plugin: 'ch.tutteli.kotlin.utils'
 kotlinutils.kotlinVersion = kotlin_version
@@ -64,7 +64,7 @@ dependencies {
     compile kotlinStdlib()
     compile kotlinReflect()
     testCompile "ch.tutteli.atrium:atrium-cc-en_GB-robstoll:$atrium_version", excludeKotlin
-    testCompile "ch.tutteli:tutteli-spek-extensions:$tutteli_spek_extensions"
+    testCompile "ch.tutteli.spek:tutteli-spek-extensions:$tutteli_spek_extensions"
 }
 /*
 

@@ -3,13 +3,14 @@ package ch.tutteli.niok
 import ch.tutteli.atrium.api.cc.en_GB.toBe
 import ch.tutteli.atrium.verbs.expect
 import ch.tutteli.spek.extensions.TempFolder
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.describe
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.lifecycle.CachingMode
+import org.spekframework.spek2.style.specification.describe
 import java.io.File
 import java.nio.file.Paths
 
 object RelativeToSpec : Spek({
-    val tempFolder = TempFolder.perAction()
+    val tempFolder = TempFolder.perGroup()
     registerListener(tempFolder)
 
     describe("compare Kotlin's File.relativeTo with Path.relativize") {
@@ -34,26 +35,29 @@ object RelativeToSpec : Spek({
             )
         }
         list.forEach { (stringPath1, stringPath2, expectRelativeTo, expectRelativize) ->
-            action("path1: $stringPath1, path2: $stringPath2 -> relativeTo: $expectRelativeTo, relativize: $expectRelativize") {
-                val path1 = tempFolder.newFile(stringPath1)
-                val path2 = if (stringPath1 != stringPath2) {
-                    tempFolder.newFile(stringPath2)
-                } else {
-                    path1
+            context("path1: $stringPath1, path2: $stringPath2 -> relativeTo: $expectRelativeTo, relativize: $expectRelativize") {
+                val path1 by memoized(CachingMode.SCOPE) { tempFolder.newFile(stringPath1) }
+                val path2 by memoized(CachingMode.SCOPE) {
+                    if (stringPath1 != stringPath2) {
+                        tempFolder.newFile(stringPath2)
+                    } else {
+                        path1
+                    }
                 }
-                val resultRelativeTo = path1.relativeTo(path2)
-                test("relativeTo which delegates to Kotlin's File.relativeTo") {
+
+                val resultRelativeTo by memoized(CachingMode.SCOPE) { path1.relativeTo(path2) }
+                it("relativeTo which delegates to Kotlin's File.relativeTo") {
                     expect(resultRelativeTo).toBe(Paths.get(expectRelativeTo))
                 }
-                test("path2.resolve(Path.relativeTo).normalize() = path1.normalize()") {
+                it("path2.resolve(Path.relativeTo).normalize() = path1.normalize()") {
                     expect(path2.resolve(resultRelativeTo).normalize()).toBe(path1.normalize())
                 }
 
-                val resultRelativize = path1.relativize(path2)
-                test("Path.relativize") {
+                val resultRelativize by memoized(CachingMode.SCOPE) { path1.relativize(path2) }
+                it("Path.relativize") {
                     expect(resultRelativize).toBe(Paths.get(expectRelativize))
                 }
-                test("path1.resolve(Path.relativize).normalize() = path2.normalize()") {
+                it("path1.resolve(Path.relativize).normalize() = path2.normalize()") {
                     expect(path1.resolve(resultRelativize).normalize()).toBe(path2.normalize())
                 }
             }
