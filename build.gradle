@@ -16,7 +16,7 @@ buildscript {
         tutteli_spek_extensions = '0.4.1'
 
         // detekt/sonarcloud
-        detekt_version = '1.0.0.RC8'
+        detekt_version = '1.0.0.RC9.2'
     }
 
     repositories {
