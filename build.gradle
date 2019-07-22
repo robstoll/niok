@@ -1,6 +1,6 @@
 buildscript {
     project.group = 'ch.tutteli.niok'
-    project.version ='0.2.1'
+    project.version ='0.2.2'
     project.description = "API for java.nio.file in a Kotlin idiomatic way"
 
     ext {
@@ -28,6 +28,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.junit.platform:junit-platform-gradle-plugin:$junit_platform_version"
         classpath "ch.tutteli:tutteli-gradle-dokka:$tutteli_gradle_version"
+        classpath "ch.tutteli:tutteli-gradle-kotlin-module-info:$tutteli_gradle_version"
         classpath "ch.tutteli:tutteli-gradle-kotlin-utils:$tutteli_gradle_version"
         classpath "ch.tutteli:tutteli-gradle-publish:$tutteli_gradle_version"
         classpath "ch.tutteli:tutteli-gradle-spek:$tutteli_gradle_version"
