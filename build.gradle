@@ -1,6 +1,6 @@
 buildscript {
     project.group = 'ch.tutteli.niok'
-    project.version ='0.2.3'
+    project.version ='0.3.0-SNAPSHOT'
     project.description = "API for java.nio.file in a Kotlin idiomatic way"
 
     ext {
