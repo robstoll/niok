@@ -49,6 +49,7 @@ apply plugin: 'ch.tutteli.spek'
 apply plugin: 'ch.tutteli.kotlin.utils'
 kotlinutils.kotlinVersion = kotlin_version
 
+apply plugin: 'ch.tutteli.kotlin.module.info'
 apply plugin: 'ch.tutteli.publish'
 
 apply plugin: "io.gitlab.arturbosch.detekt"
