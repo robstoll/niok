@@ -1,6 +1,6 @@
 buildscript {
     project.group = 'ch.tutteli.niok'
-    project.version ='0.3.0-SNAPSHOT'
+    project.version ='0.2.1'
     project.description = "API for java.nio.file in a Kotlin idiomatic way"
 
     ext {
@@ -73,7 +73,7 @@ Release & deploy a commit
     1. search for X.Y.Z-SNAPSHOT and replace with X.Y.Z
 2. update master:
     a) point to the tag
-        1) search for `branch=master` and replace it with `tag=vX.Y.Z` (build status and coverage in README.md)
+        1) search for `branch=master` and replace it with `branch=vX.Y.Z` (build status and coverage in README.md)
         2) search for `tree/master` and replace it with `tree/vX.Y.Z` (README.md)
     b) commit (modified .travis.yml, build.gradle and README.md)
     c) git tag vX.Y.Z
