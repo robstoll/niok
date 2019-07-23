@@ -1,6 +1,6 @@
 [![Download](https://api.bintray.com/packages/robstoll/tutteli-jars/niok/images/download.svg)](https://bintray.com/robstoll/tutteli-jars/niok/_latestVersion)
 [![Apache license](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)](http://opensource.org/licenses/Apache2.0)
-[![Build Status Travis](https://travis-ci.org/robstoll/niok.svg?branch=master)](https://travis-ci.org/robstoll/niok/branches)
+[![Build Status Travis](https://travis-ci.org/robstoll/niok.svg?branch=v0.3.0)](https://travis-ci.org/robstoll/niok/branches)
 [![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/26r91mvbtvtlkeay/branch/master?svg=true)](https://ci.appveyor.com/project/robstoll/niok/branch/master)
 [![SonarCloud Status](https://sonarcloud.io/api/project_badges/measure?project=robstoll_niok&metric=alert_status)](https://sonarcloud.io/dashboard?id=robstoll_niok)
 
