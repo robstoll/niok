@@ -12,13 +12,13 @@ import java.nio.file.Path
 /**
  * Delegates to [kotlin.io.appendBytes].
  */
-fun Path.appendBytes(array: ByteArray): Unit =
+fun <T: Path> T.appendBytes(array: ByteArray): Unit =
     this.toFile().appendBytes(array)
 
 /**
  * @See kotlin.io.appendText
  */
-fun Path.appendText(text: String, charset: Charset = Charsets.UTF_8): Unit =
+fun <T: Path> T.appendText(text: String, charset: Charset = Charsets.UTF_8): Unit =
     this.toFile().appendText(text, charset)
 
 //
@@ -28,7 +28,7 @@ fun Path.appendText(text: String, charset: Charset = Charsets.UTF_8): Unit =
 /**
  * Delegates to [kotlin.io.copyRecursively].
  */
-fun Path.copyRecursively(
+fun <T: Path> T.copyRecursively(
     target: Path,
     overwrite: Boolean = false,
     onError: (Path, IOException) -> OnErrorAction = { _, exception -> throw exception }
@@ -41,7 +41,7 @@ fun Path.copyRecursively(
 /**
  * Delegates to [kotlin.io.deleteRecursively].
  */
-fun Path.deleteRecursively(): Boolean = this.toFile().deleteRecursively()
+fun <T: Path> T.deleteRecursively(): Boolean = this.toFile().deleteRecursively()
 
 //
 // endsWith is already provided by Path
@@ -50,24 +50,24 @@ fun Path.deleteRecursively(): Boolean = this.toFile().deleteRecursively()
 /**
  * Delegates to [kotlin.io.extension].
  */
-val Path.extension get() : String = this.toFile().extension
+val <T: Path> T.extension get() : String = this.toFile().extension
 
 /**
  * Delegates to [kotlin.io.forEachBlock].
  */
-fun Path.forEachBlock(action: (buffer: ByteArray, bytesRead: Int) -> Unit): Unit =
+fun <T: Path> T.forEachBlock(action: (buffer: ByteArray, bytesRead: Int) -> Unit): Unit =
     this.toFile().forEachBlock(action)
 
 /**
  * Delegates to [kotlin.io.forEachBlock].
  */
-fun Path.forEachBlock(blockSize: Int, action: (buffer: ByteArray, bytesRead: Int) -> Unit): Unit =
+fun <T: Path> T.forEachBlock(blockSize: Int, action: (buffer: ByteArray, bytesRead: Int) -> Unit): Unit =
     this.toFile().forEachBlock(blockSize, action)
 
 /**
  * Delegates to [kotlin.io.forEachLine].
  */
-fun Path.forEachLine(charset: Charset = Charsets.UTF_8, action: (line: String) -> Unit): Unit =
+fun <T: Path> T.forEachLine(charset: Charset = Charsets.UTF_8, action: (line: String) -> Unit): Unit =
     this.toFile().forEachLine(charset, action)
 
 //
@@ -77,17 +77,17 @@ fun Path.forEachLine(charset: Charset = Charsets.UTF_8, action: (line: String) -
 /**
  * Delegates to [kotlin.io.invariantSeparatorsPath].
  */
-val Path.invariantSeparatorsPath get() : String = this.toFile().invariantSeparatorsPath
+val <T: Path> T.invariantSeparatorsPath get() : String = this.toFile().invariantSeparatorsPath
 
 /**
  * Delegates to [kotlin.io.isRooted].
  */
-val Path.isRooted get(): Boolean = toFile().isRooted
+val <T: Path> T.isRooted get(): Boolean = toFile().isRooted
 
 /**
  * Delegates to [kotlin.io.nameWithoutExtension].
  */
-val Path.nameWithoutExtension get(): String = this.toFile().nameWithoutExtension
+val <T: Path> T.nameWithoutExtension get(): String = this.toFile().nameWithoutExtension
 
 //
 // normalize is already provided by Path
@@ -100,7 +100,7 @@ val Path.nameWithoutExtension get(): String = this.toFile().nameWithoutExtension
 /**
  * Delegates to [kotlin.io.printWriter].
  */
-inline fun Path.printWriter(charset: Charset = Charsets.UTF_8): PrintWriter =
+inline fun <T: Path> T.printWriter(charset: Charset = Charsets.UTF_8): PrintWriter =
     this.toFile().printWriter(charset)
 
 //
@@ -118,7 +118,7 @@ inline fun Path.printWriter(charset: Charset = Charsets.UTF_8): PrintWriter =
 /**
  * Delegates to [kotlin.io.reader].
  */
-inline fun Path.reader(charset: Charset = Charsets.UTF_8): InputStreamReader =
+inline fun <T: Path> T.reader(charset: Charset = Charsets.UTF_8): InputStreamReader =
     this.toFile().reader(charset)
 
 /**
@@ -145,19 +145,19 @@ inline fun Path.reader(charset: Charset = Charsets.UTF_8): InputStreamReader =
  * Hence, in case you want to use the result in [Path.resolve] later on,
  * then you should prefer [Path.relativeTo] over [Path.relativize].
  */
-fun Path.relativeTo(other: Path): Path =
+fun <T: Path> T.relativeTo(other: Path): Path =
     this.toFile().relativeTo(other.toFile()).toPath()
 
 /**
  * Delegates to [kotlin.io.relativeToOrNull].
  */
-fun Path.relativeToOrNull(other: Path): Path? =
+fun <T: Path> T.relativeToOrNull(other: Path): Path? =
     this.toFile().relativeToOrNull(other.toFile())?.toPath()
 
 /**
  * Delegates to [kotlin.io.relativeToOrSelf].
  */
-fun Path.relativeToOrSelf(other: Path): Path =
+fun <T: Path> T.relativeToOrSelf(other: Path): Path =
     this.toFile().relativeToOrSelf(other.toFile()).toPath()
 
 //
@@ -171,7 +171,7 @@ fun Path.relativeToOrSelf(other: Path): Path =
 /**
  * Delegates to [kotlin.io.toRelativeString].
  */
-fun Path.toRelativeString(base: Path): String =
+fun <T: Path> T.toRelativeString(base: Path): String =
     this.toFile().toRelativeString(base.toFile())
 
 /**
@@ -187,10 +187,10 @@ inline fun <T> Path.useLines(charset: Charset = Charsets.UTF_8, block: (Sequence
 /**
  * Delegates to [kotlin.io.writeText].
  */
-fun Path.writeText(text: String, charset: Charset = Charsets.UTF_8): Unit =
+fun <T: Path> T.writeText(text: String, charset: Charset = Charsets.UTF_8): Unit =
     this.toFile().writeText(text, charset)
 
 /**
  * Delegates to [kotlin.io.writer].
  */
-inline fun Path.writer(charset: Charset = Charsets.UTF_8): OutputStreamWriter = this.toFile().writer(charset)
+inline fun <T: Path> T.writer(charset: Charset = Charsets.UTF_8): OutputStreamWriter = this.toFile().writer(charset)

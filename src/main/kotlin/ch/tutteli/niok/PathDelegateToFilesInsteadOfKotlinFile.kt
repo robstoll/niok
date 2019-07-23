@@ -15,51 +15,51 @@ import java.nio.file.Path
 /**
  * Delegates to [Files.newBufferedReader].
  */
-inline fun Path.newBufferedReader(charset: Charset = Charsets.UTF_8): BufferedReader =
+inline fun <T: Path> T.newBufferedReader(charset: Charset = Charsets.UTF_8): BufferedReader =
     Files.newBufferedReader(this, charset)
 
 /**
  * Delegates to [Files.newBufferedWriter].
  */
-inline fun Path.newBufferedWriter(charset: Charset = Charsets.UTF_8, vararg openOptions: OpenOption): BufferedWriter =
+inline fun <T: Path> T.newBufferedWriter(charset: Charset = Charsets.UTF_8, vararg openOptions: OpenOption): BufferedWriter =
     Files.newBufferedWriter(this, charset, *openOptions)
 
 /**
  * Delegates to [Files.copy].
  */
-inline fun Path.copyTo(target: Path, vararg copyOptions: CopyOption): Path =
+inline fun <T: Path> T.copyTo(target: Path, vararg copyOptions: CopyOption): Path =
     Files.copy(this, target, *copyOptions)
 
 /**
  * Delegates to [Files.newInputStream].
  */
-inline fun Path.newInputStream(vararg openOptions: OpenOption): InputStream =
+inline fun <T: Path> T.newInputStream(vararg openOptions: OpenOption): InputStream =
     Files.newInputStream(this, *openOptions)
 
 /**
  * Delegates to [Files.newOutputStream].
  */
-inline fun Path.newOutputStream(vararg openOptions: OpenOption): OutputStream =
+inline fun <T: Path> T.newOutputStream(vararg openOptions: OpenOption): OutputStream =
     Files.newOutputStream(this, *openOptions)
 
 /**
  * Delegates to [Files.readAllBytes].
  */
-inline fun Path.readAllBytes(): ByteArray = Files.readAllBytes(this)
+inline fun <T: Path> T.readAllBytes(): ByteArray = Files.readAllBytes(this)
 
 /**
  * Delegates to [Files.readAllLines].
  */
-inline fun Path.readAllLines(charset: Charset = Charsets.UTF_8): List<String> = Files.readAllLines(this, charset)
+inline fun <T: Path> T.readAllLines(charset: Charset = Charsets.UTF_8): List<String> = Files.readAllLines(this, charset)
 
 /**
  * Converts [Path.readAllBytes] to a string using the given [charset].
  */
-inline fun Path.readText(charset: Charset = Charsets.UTF_8): String =
+inline fun <T: Path> T.readText(charset: Charset = Charsets.UTF_8): String =
     readAllBytes().toString(charset)
 
 /**
  * Delegates to [Files.write].
  */
-inline fun Path.writeBytes(array: ByteArray, vararg openOptions: OpenOption): Path =
+inline fun <T: Path> T.writeBytes(array: ByteArray, vararg openOptions: OpenOption): Path =
     Files.write(this, array, *openOptions)
