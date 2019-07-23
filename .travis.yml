@@ -23,7 +23,7 @@ script:
   - |
       if [ "$TRAVIS_TEST_RESULT" == 0 ] && [ "$TRAVIS_JDK_VERSION" == oraclejdk8 ]; then
           sonar-scanner \
-              -Dsonar.projectVersion=0.3.0 \
+              -Dsonar.projectVersion=0.4.0-SNAPSHOT \
               -Dsonar.projectKey=robstoll_niok \
               -Dsonar.kotlin.detekt.reportPaths=build/detekt/detekt-checkstyle.xml \
               -Dsonar.sources=src/main/kotlin \
