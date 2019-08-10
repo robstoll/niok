@@ -16,20 +16,17 @@ before_install:
  - chmod +x gr
 install: true
 
-# -Dsonar.coverage.jacoco.xmlReportPaths=build/reports/jacoco/report.xml
-# Unfortunately not yet ready, see:
-# https://community.sonarsource.com/t/sonar-kotlin-coverage-fails-due-to-line-is-out-of-range-errors/3201/4
-
 script:
   - ./gr -i build detektCheck
   - |
       if [ "$TRAVIS_TEST_RESULT" == 0 ] && [ "$TRAVIS_JDK_VERSION" == oraclejdk8 ]; then
-          sonar-scanner \
-              -Dsonar.projectVersion=0.4.0-SNAPSHOT \
-              -Dsonar.projectKey=robstoll_niok \
-              -Dsonar.kotlin.detekt.reportPaths=build/detekt/detekt-checkstyle.xml \
-              -Dsonar.sources=src/main/kotlin \
-              -Dsonar.tests=src/test/kotlin
+        sonar-scanner \
+            -Dsonar.projectVersion=0.4.0-SNAPSHOT \
+            -Dsonar.projectKey=robstoll_niok \
+            -Dsonar.kotlin.detekt.reportPaths=build/detekt/detekt-checkstyle.xml \
+            -Dsonar.sources=src/main/kotlin \
+            -Dsonar.tests=src/test/kotlin \
+            -Dsonar.coverage.jacoco.xmlReportPaths=build/reports/jacoco/report.xml
       fi
 
 before_cache:
