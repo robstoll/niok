@@ -17,7 +17,7 @@ before_install:
 install: true
 
 script:
-  - ./gr -i build detekt
+  - ./gr build detekt
   - |
       if [ "$TRAVIS_TEST_RESULT" == 0 ] && [ "$TRAVIS_JDK_VERSION" == oraclejdk8 ]; then
         sonar-scanner \
