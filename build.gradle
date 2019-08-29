@@ -15,7 +15,7 @@ buildscript {
         tutteli_spek_extensions = '0.4.1'
 
         // detekt/sonarcloud
-        detekt_version = '1.0.0.RC8'
+        detekt_version = '1.0.1'
     }
 
     repositories {
@@ -30,7 +30,7 @@ buildscript {
         classpath "ch.tutteli:tutteli-gradle-kotlin-utils:$tutteli_gradle_version"
         classpath "ch.tutteli:tutteli-gradle-publish:$tutteli_gradle_version"
         classpath "ch.tutteli:tutteli-gradle-spek:$tutteli_gradle_version"
-        classpath "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
+        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
     }
 }
 
@@ -52,13 +52,14 @@ apply plugin: 'ch.tutteli.publish'
 
 apply plugin: "io.gitlab.arturbosch.detekt"
 detekt {
-    version = detekt_version
-    defaultProfile {
-        filters = ".*/resources/.*,.*$rootProject.name/.*/build/.*"
-        output = "$rootProject.buildDir/detekt"
-        config = file("$rootProject.projectDir/gradle/scripts/detekt.yml")
+    failFast = true
+    filters = ".*/resources/.*,.*$rootProject.name/.*/build/.*"
+    config = files("$rootProject.projectDir/gradle/scripts/detekt.yml")
+    reports {
+        xml.enabled = true
     }
 }
+
 
 dependencies {
     compile kotlinStdlib()
