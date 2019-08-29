@@ -68,6 +68,14 @@ dependencies {
     testCompile "ch.tutteli.atrium:atrium-cc-en_GB-robstoll:$atrium_version", excludeKotlin
     testCompile "ch.tutteli.spek:tutteli-spek-extensions:$tutteli_spek_extensions"
 }
+
+if (JavaVersion.current() >= JavaVersion.VERSION_1_9) {
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_9
+        targetCompatibility = JavaVersion.VERSION_1_9
+    }
+}
+
 /*
 
 Release & deploy a commit
