@@ -12,7 +12,7 @@ buildscript {
 
         // test
         atrium_version = '0.8.0'
-        tutteli_spek_extensions = '0.4.1'
+        tutteli_spek_extensions = '0.5.0'
 
         // detekt/sonarcloud
         detekt_version = '1.0.1'
