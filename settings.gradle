@@ -1,1 +1,8 @@
+pluginManagement {
+    repositories {
+        def localGradleRepo = "/Users/jmfayard/akelius/buildSrcVersions/plugin/build/repository"
+        if (new File(localGradleRepo).exists()) maven { url(localGradleRepo) }
+        gradlePluginPortal()
+    }
+}
 rootProject.name='niok'
