@@ -125,7 +125,7 @@ inline fun <T: Path> T.getAttribute(attribute: String, vararg linkOptions: LinkO
 /**
  * Delegates to [Files.getFileAttributeView].
  */
-inline fun <reified V : FileAttributeView> Path.getFileAttributeView(vararg linkOptions: LinkOption): V =
+inline fun <reified V : FileAttributeView> Path.getFileAttributeView(vararg linkOptions: LinkOption): V? =
     Files.getFileAttributeView(this, V::class.java, *linkOptions)
 
 /**
