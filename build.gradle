@@ -1,6 +1,6 @@
 buildscript {
     project.group = 'ch.tutteli.niok'
-    project.version ='0.4.0-SNAPSHOT'
+    project.version ='1.0.0'
     project.description = "API for java.nio.file in a Kotlin idiomatic way"
 
     ext {
@@ -79,16 +79,16 @@ if (JavaVersion.current() >= JavaVersion.VERSION_1_9) {
 
 Release & deploy a commit
 --------------------------------
-    1. search for X.Y.Z-SNAPSHOT and replace with X.Y.Z
+1. search for X.Y.Z-SNAPSHOT and replace with X.Y.Z
 2. update master:
     a) point to the tag
-        1) search for `branch=master` and replace it with `branch=vX.Y.Z` (build status and coverage in README.md)
-        2) search for `tree/master` and replace it with `tree/vX.Y.Z` (README.md)
+        1) search for `branch=master` and replace it with `branch=vX.Y.Z` (build status in README.md)
+        2) search for `tree/master` and replace it with `tree/vX.Y.Z` (so far nowhere)
     b) commit (modified .travis.yml, build.gradle and README.md)
     c) git tag vX.Y.Z
     d) git push origin vX.Y.Z
 4. deploy to bintray:
-    a) ./gr publishToBintray
+    a) java -version 2>&1 | grep "version \"9" && ./gr clean publishToBintray
     b) Log in to bintray, check and publish new jars
 5. create release on github
 
