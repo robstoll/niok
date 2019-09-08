@@ -8,13 +8,13 @@ import java.nio.file.Paths
 /**
  * Returns [Path.toAbsolutePath].[Path.toString].
  */
-val <T: Path> T.absolutePathAsString
+val Path.absolutePathAsString
     get() : String = if (isAbsolute) toString() else toAbsolutePath().toString()
 
 /**
  * Returns [Path.getFileName].[Path.toString].
  */
-val <T: Path> T.fileNameAsString get() = fileName.toString()
+val Path.fileNameAsString get() = fileName.toString()
 
 /**
  * Converts the given [dir], [first] and [more] into a [Path] and [Path.resolve]s it.
@@ -23,5 +23,5 @@ val <T: Path> T.fileNameAsString get() = fileName.toString()
  *
  * @return The new resolved [Path].
  */
-inline fun <T: Path> T.resolve(dir: String, first: String, vararg more: String): Path =
+inline fun Path.resolve(dir: String, first: String, vararg more: String): Path =
     resolve(Paths.get(dir, first, *more))
