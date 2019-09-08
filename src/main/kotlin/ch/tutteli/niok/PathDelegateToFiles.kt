@@ -60,6 +60,11 @@ inline fun Path.deleteIfExists(): Boolean = Files.deleteIfExists(this)
 inline val Path.exists get(): Boolean = Files.exists(this)
 
 /**
+ * Assumes that this path [Path.isSymbolicLink] and delegates to [Files.readSymbolicLink].
+ */
+inline fun Path.followSymbolicLink() = Files.readSymbolicLink(this)
+
+/**
  * Delegates to [Files.isDirectory] without [LinkOption]s.
  */
 inline val Path.isDirectory get(): Boolean = Files.isDirectory(this)
