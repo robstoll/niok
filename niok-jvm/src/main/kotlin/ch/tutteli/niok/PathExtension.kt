@@ -8,13 +8,13 @@ import java.nio.file.Paths
 /**
  * Returns [Path.toAbsolutePath].[Path.toString].
  */
-val Path.absolutePathAsString
-    get() : String = if (isAbsolute) toString() else toAbsolutePath().toString()
+val Path.absolutePathAsString  : String
+    get() = if (isAbsolute) toString() else toAbsolutePath().toString()
 
 /**
  * Returns [Path.getFileName].[Path.toString].
  */
-val Path.fileNameAsString get() = fileName.toString()
+val Path.fileNameAsString: String get() = fileName.toString()
 
 /**
  * Converts the given [dir], [first] and [more] into a [Path] and [Path.resolve]s it.
