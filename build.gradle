@@ -1,12 +1,8 @@
 buildscript {
     project.group = 'ch.tutteli.niok'
     project.version ='1.0.0'
-    project.description = "API for java.nio.file in a Kotlin idiomatic way"
 
     ext {
-        // project setup
-        tutteli_gradle_version = '0.29.0'
-
         // main
         kotlin_version = '1.3.50'
 
@@ -16,6 +12,21 @@ buildscript {
 
         // detekt/sonarcloud
         detekt_version = '1.0.1'
+
+        srcAndResourcesFromJvmProject = { Project project ->
+            def jvmProject = prefixedProject('jvm')
+            project.sourceSets {
+                main {
+                    kotlin.srcDirs += "${jvmProject.projectDir}/src/main/kotlin"
+                    resources.srcDirs += "${jvmProject.projectDir}/src/main/resources"
+                }
+                test {
+                    java.srcDirs += "${jvmProject.projectDir}/src/test/java"
+                    kotlin.srcDirs += ["${jvmProject.projectDir}/src/test/kotlin", "${jvmProject.projectDir}/src/test/java"]
+                    resources.srcDirs += "${jvmProject.projectDir}/src/test/resources"
+                }
+            }
+        }
     }
 
     repositories {
@@ -25,53 +36,61 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "ch.tutteli:tutteli-gradle-dokka:$tutteli_gradle_version"
-        classpath "ch.tutteli:tutteli-gradle-kotlin-module-info:$tutteli_gradle_version"
-        classpath "ch.tutteli:tutteli-gradle-kotlin-utils:$tutteli_gradle_version"
-        classpath "ch.tutteli:tutteli-gradle-publish:$tutteli_gradle_version"
-        classpath "ch.tutteli:tutteli-gradle-spek:$tutteli_gradle_version"
+        classpath "ch.tutteli:tutteli-gradle-dokka:$gradle.ext.tutteli_plugins_version"
+        classpath "ch.tutteli:tutteli-gradle-kotlin-module-info:$gradle.ext.tutteli_plugins_version"
+        classpath "ch.tutteli:tutteli-gradle-kotlin-utils:$gradle.ext.tutteli_plugins_version"
+        classpath "ch.tutteli:tutteli-gradle-project-utils:$gradle.ext.tutteli_plugins_version"
+        classpath "ch.tutteli:tutteli-gradle-publish:$gradle.ext.tutteli_plugins_version"
+        classpath "ch.tutteli:tutteli-gradle-spek:$gradle.ext.tutteli_plugins_version"
         classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
     }
 }
 
-repositories {
-    mavenCentral()
-    jcenter()
-    maven { url  "https://dl.bintray.com/robstoll/tutteli-jars" }
-}
-
-apply plugin: 'kotlin'
-apply plugin: 'ch.tutteli.dokka'
-apply plugin: 'ch.tutteli.spek'
-
+apply plugin: "ch.tutteli.project.utils"
 apply plugin: 'ch.tutteli.kotlin.utils'
 kotlinutils.kotlinVersion = kotlin_version
 
-apply plugin: 'ch.tutteli.kotlin.module.info'
-apply plugin: 'ch.tutteli.publish'
+subprojects {
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven { url  "https://dl.bintray.com/robstoll/tutteli-jars" }
+    }
 
-apply plugin: "io.gitlab.arturbosch.detekt"
-detekt {
-    failFast = true
-    filters = ".*/resources/.*,.*$rootProject.name/.*/build/.*"
-    config = files("$rootProject.projectDir/gradle/scripts/detekt.yml")
-    reports {
-        xml.enabled = true
+    apply plugin: 'kotlin'
+    apply plugin: 'ch.tutteli.dokka'
+    apply plugin: 'ch.tutteli.spek'
+
+
+    apply plugin: 'ch.tutteli.kotlin.module.info'
+    apply plugin: 'ch.tutteli.publish'
+
+    dependencies {
+        compile kotlinStdlib()
+        compile kotlinReflect()
+    }
+
+    if (JavaVersion.current() >= JavaVersion.VERSION_1_9) {
+        java {
+            sourceCompatibility = JavaVersion.VERSION_1_9
+            targetCompatibility = JavaVersion.VERSION_1_9
+        }
     }
 }
 
 
-dependencies {
-    compile kotlinStdlib()
-    compile kotlinReflect()
-    testCompile "ch.tutteli.atrium:atrium-cc-en_GB-robstoll:$atrium_version", excludeKotlin
-    testCompile "ch.tutteli.spek:tutteli-spek-extensions:$tutteli_spek_extensions"
+repositories {
+    mavenCentral()
+    jcenter()
 }
-
-if (JavaVersion.current() >= JavaVersion.VERSION_1_9) {
-    java {
-        sourceCompatibility = JavaVersion.VERSION_1_9
-        targetCompatibility = JavaVersion.VERSION_1_9
+apply plugin: "io.gitlab.arturbosch.detekt"
+detekt {
+    failFast = true
+    input = files(subprojects*.collect { it.projectDir })
+    filters = ".*/resources/.*,.*$rootProject.name/.*/build/.*"
+    config = files("$rootProject.projectDir/gradle/scripts/detekt.yml")
+    reports {
+        xml.enabled = true
     }
 }
 

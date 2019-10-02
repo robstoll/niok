@@ -24,9 +24,9 @@ script:
             -Dsonar.projectVersion=1.0.0 \
             -Dsonar.projectKey=robstoll_niok \
             -Dsonar.kotlin.detekt.reportPaths=build/detekt/detekt-checkstyle.xml \
-            -Dsonar.sources=src/main/kotlin \
-            -Dsonar.tests=src/test/kotlin \
-            -Dsonar.coverage.jacoco.xmlReportPaths=build/reports/jacoco/report.xml
+            -Dsonar.sources=niok-jvm/src/main/kotlin \
+            -Dsonar.tests=niok-jvm/src/test/kotlin \
+            -Dsonar.coverage.jacoco.xmlReportPaths=niok-jvm/build/reports/jacoco/report.xml
       fi
 
 before_cache:

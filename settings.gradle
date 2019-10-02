@@ -1,1 +1,20 @@
 rootProject.name='niok'
+
+buildscript {
+    gradle.ext.tutteli_plugins_version = '0.29.0'
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath "ch.tutteli:tutteli-gradle-settings:$gradle.ext.tutteli_plugins_version"
+    }
+}
+
+apply plugin: 'ch.tutteli.settings'
+
+include {
+    if (System.getenv('CI')) {
+        _ android
+    }
+    _ jvm
+}
