@@ -11,7 +11,7 @@ buildscript {
         tutteli_spek_extensions = '0.6.0'
 
         // detekt/sonarcloud
-        detekt_version = '1.1.0'
+        detekt_version = '1.1.1'
 
         srcAndResourcesFromJvmProject = { Project project ->
             def jvmProject = prefixedProject('jvm')
