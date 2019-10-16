@@ -50,6 +50,16 @@ apply plugin: "ch.tutteli.project.utils"
 apply plugin: 'ch.tutteli.kotlin.utils'
 kotlinutils.kotlinVersion = kotlin_version
 
+configurations{
+    dependabot
+}
+
+dependencies {
+    // helps dependabot to recognise versions which it should update
+    dependabot "ch.tutteli.atrium:atrium-cc-en_GB-robstoll:$atrium_version"
+    dependabot "ch.tutteli.spek:tutteli-spek-extensions:$tutteli_spek_extensions"
+}
+
 subprojects {
     repositories {
         mavenCentral()
