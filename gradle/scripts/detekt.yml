@@ -1,10 +1,10 @@
 autoCorrect: false
 
 build:
-    maxIssues: 3
+    maxIssues: 6
     weights:
-        complexity: 2
-        style: 0.5
+        complexity: 3
+        style: 1
 
 comments:
     UndocumentedPublicClass:
