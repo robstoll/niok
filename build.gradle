@@ -117,8 +117,8 @@ Release & deploy a commit
     c) git tag vX.Y.Z
     d) git push origin vX.Y.Z
 4. deploy to bintray:
-    a) java -version 2>&1 | grep "version \"9" && ./gr clean publishToBintray
-    b) Log in to bintray, check and publish new jars
+    a) java -version 2>&1 | grep "version \"9" && CI=true ./gr clean publishToBintray
+    b) Log in to bintray, check that there are 16 artifacts which needs to be published; publish them
 5. create release on github
 
 Prepare next dev cycle
