@@ -13,11 +13,11 @@ addons:
             secure: $SONAR_TOKEN
 
 before_install:
- - chmod +x gr
+ - chmod +x ./gradlew
 install: true
 
 script:
-  - ./gr build detekt
+  - ./gradlew build detekt
   - |
       if [ "$TRAVIS_TEST_RESULT" == 0 ] && [ "$TRAVIS_JDK_VERSION" == oraclejdk11 ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
         sonar-scanner \
