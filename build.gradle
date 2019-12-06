@@ -97,7 +97,6 @@ apply plugin: "io.gitlab.arturbosch.detekt"
 detekt {
     failFast = true
     input = files(subprojects*.collect { it.projectDir })
-    filters = ".*/resources/.*,.*$rootProject.name/.*/build/.*"
     config = files("$rootProject.projectDir/gradle/scripts/detekt.yml")
     reports {
         xml.enabled = true
