@@ -9,7 +9,7 @@ import java.nio.file.attribute.FileAttribute
 /**
  * Returns [Path.toAbsolutePath].[Path.toString].
  */
-val Path.absolutePathAsString  : String
+val Path.absolutePathAsString: String
     get() = if (isAbsolute) toString() else toAbsolutePath().toString()
 
 /**
@@ -30,9 +30,34 @@ inline fun Path.resolve(dir: String, first: String, vararg more: String): Path =
 /**
  * Resolve the given [dir] and calls [createDirectory].
  */
-fun Path.newDirectory(dir: String, vararg fileAttributes: FileAttribute<*>) = resolve(dir).createDirectory(*fileAttributes)
+fun Path.newDirectory(dir: String, vararg fileAttributes: FileAttribute<*>) =
+    resolve(dir).createDirectory(*fileAttributes)
 
 /**
  * Resolve the given [file] and calls [createDirectory].
  */
-fun Path.newFile(file: String, vararg fileAttributes: FileAttribute<*>) = resolve(file).createFile(*fileAttributes)
+fun Path.newFile(file: String, vararg fileAttributes: FileAttribute<*>) =
+    resolve(file).createFile(*fileAttributes)
+
+/**
+ * Delegates to [createDirectory] and swallows a potential [java.nio.file.FileAlreadyExistsException].
+ */
+inline fun Path.createDirectoryIfNotExists(vararg fileAttributes: FileAttribute<*>): Path =
+    swallowFileAlreadyExistsException { createDirectory(*fileAttributes) }
+
+/**
+ * Delegates to [createFile] and swallows a potential [java.nio.file.FileAlreadyExistsException].
+ */
+inline fun Path.createFileIfNotExists(vararg fileAttributes: FileAttribute<*>): Path =
+    swallowFileAlreadyExistsException { createFile(*fileAttributes) }
+
+
+@PublishedApi
+internal inline fun Path.swallowFileAlreadyExistsException(action: Path.() -> Unit) =
+    apply {
+        try {
+            action(this)
+        } catch (ignored: java.nio.file.FileAlreadyExistsException) {
+            // can be ignored
+        }
+    }
