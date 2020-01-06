@@ -21,7 +21,7 @@ script:
   - |
       if [ "$TRAVIS_TEST_RESULT" == 0 ] && [ "$TRAVIS_JDK_VERSION" == oraclejdk11 ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
         sonar-scanner \
-            -Dsonar.projectVersion=1.3.0 \
+            -Dsonar.projectVersion=1.3.1 \
             -Dsonar.projectKey=robstoll_niok \
             -Dsonar.kotlin.detekt.reportPaths=build/detekt/detekt-checkstyle.xml \
             -Dsonar.sources=niok-jvm/src/main/kotlin \
