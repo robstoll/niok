@@ -1,6 +1,6 @@
 [![Download](https://api.bintray.com/packages/robstoll/tutteli-jars/niok/images/download.svg)](https://bintray.com/robstoll/tutteli-jars/niok/_latestVersion)
 [![Apache license](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)](http://opensource.org/licenses/Apache2.0)
-[![Build Status Travis](https://travis-ci.org/robstoll/niok.svg?tag=v1.3.1)](https://travis-ci.org/robstoll/niok/branches)
+[![Build Status Travis](https://travis-ci.org/robstoll/niok.svg?tag=v1.3.2)](https://travis-ci.org/robstoll/niok/branches)
 [![Build status GitHub Actions](https://github.com/robstoll/niok/workflows/Windows/badge.svg)](https://github.com/robstoll/niok/actions/)
 [![SonarCloud Status](https://sonarcloud.io/api/project_badges/measure?project=robstoll_niok&metric=alert_status)](https://sonarcloud.io/dashboard?id=robstoll_niok)
 
@@ -19,7 +19,7 @@ Following an example if you use gradle and jcenter:
 ```
 repositories { jcenter() }
 dependencies {
-    implementation 'ch.tutteli.niok:niok:1.3.1'
+    implementation 'ch.tutteli.niok:niok:1.3.2'
 }
 ```
 
