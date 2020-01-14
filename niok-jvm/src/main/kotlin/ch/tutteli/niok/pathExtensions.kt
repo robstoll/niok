@@ -49,7 +49,12 @@ inline fun Path.createDirectoryIfNotExists(vararg fileAttributes: FileAttribute<
  * Delegates to [createFile] and swallows a potential [java.nio.file.FileAlreadyExistsException].
  */
 inline fun Path.createFileIfNotExists(vararg fileAttributes: FileAttribute<*>): Path =
-    swallowFileAlreadyExistsException { createFile(*fileAttributes) }
+    try {
+        swallowFileAlreadyExistsException { createFile(*fileAttributes) }
+    } catch (e: java.nio.file.AccessDeniedException) {
+        // windows seems to throw an AccessDeniedException in case it was a directory
+        if (isDirectory) this else throw e
+    }
 
 
 @PublishedApi
