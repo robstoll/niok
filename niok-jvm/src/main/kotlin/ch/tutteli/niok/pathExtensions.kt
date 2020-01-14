@@ -53,7 +53,11 @@ inline fun Path.createFileIfNotExists(vararg fileAttributes: FileAttribute<*>): 
         swallowFileAlreadyExistsException { createFile(*fileAttributes) }
     } catch (e: java.nio.file.AccessDeniedException) {
         // windows seems to throw an AccessDeniedException in case it was a directory
-        if (isDirectory) this else throw e
+        try {
+            if (isDirectory) this else throw e
+        } catch (e: Throwable) {
+            throw e
+        }
     }
 
 
