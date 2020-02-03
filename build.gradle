@@ -7,7 +7,7 @@ buildscript {
         kotlin_version = '1.3.61'
 
         // test
-        atrium_version = '0.8.0'
+        atrium_version = '0.9.1'
         tutteli_spek_extensions = '1.1.0'
 
         // detekt/sonarcloud
@@ -56,7 +56,7 @@ configurations {
 
 dependencies {
     // helps dependabot to recognise versions which it should update
-    dependabot "ch.tutteli.atrium:atrium-cc-en_GB-robstoll:$atrium_version"
+    dependabot "ch.tutteli.atrium:atrium-fluent-en_GB:$atrium_version"
     dependabot "ch.tutteli.spek:tutteli-spek-extensions:$tutteli_spek_extensions"
 }
 
