@@ -1,5 +1,8 @@
 package ch.tutteli.niok
 
+import ch.tutteli.atrium.api.fluent.en_GB.jdk8.exists
+import ch.tutteli.atrium.api.fluent.en_GB.jdk8.isDirectory
+import ch.tutteli.atrium.api.fluent.en_GB.jdk8.isRegularFile
 import ch.tutteli.atrium.api.fluent.en_GB.toBe
 import ch.tutteli.atrium.api.verbs.expect
 import ch.tutteli.spek.extensions.memoizedTempFolder
@@ -18,7 +21,7 @@ object CreateIfNotExistsSpec : Spek({
             val path = tempFolder.resolve("a.txt").createFileIfNotExists()
             expect(path.readText()).toBe("bla")
         }
-        it("createDirectoryIfNotExists does not override the file"){
+        it("createDirectoryIfNotExists does not override the file") {
             val path = tempFolder.resolve("a.txt").createDirectoryIfNotExists()
             expect(path.readText()).toBe("bla")
         }
@@ -27,28 +30,29 @@ object CreateIfNotExistsSpec : Spek({
     describe("directory exists") {
         it("createFileIfNotExists does not override the file") {
             val path = tempFolder.resolve("b").createFileIfNotExists()
-            //TODO replace with exists of Atrium with 0.9.0
-            expect(path.resolve("c.txt").exists).toBe(true)
+            expect(path.resolve("c.txt")).exists()
         }
-        it("createDirectoryIfNotExists does not override the file"){
+        it("createDirectoryIfNotExists does not override the file") {
             val path = tempFolder.resolve("b").createDirectoryIfNotExists()
-            expect(path.resolve("c.txt").exists).toBe(true)
+            expect(path.resolve("c.txt")).exists()
         }
     }
 
     describe("file does not exist") {
         it("createFileIfNotExists creates the file") {
             val path = tempFolder.resolve("nonExisting.txt").createFileIfNotExists()
-            //TODO replace with exists of Atrium with 0.9.0
-            expect(path.exists).toBe(true)
-            expect(path.isRegularFile).toBe(true)
+            expect(path) {
+                exists()
+                isRegularFile()
+            }
             expect(path.readText()).toBe("")
         }
         it("createDirectoryIfNotExists creates the directory") {
             val path = tempFolder.resolve("nonExisting").createDirectoryIfNotExists()
-            //TODO replace with exists of Atrium with 0.9.0
-            expect(path.exists).toBe(true)
-            expect(path.isDirectory).toBe(true)
+            expect(path) {
+                exists()
+                isDirectory()
+            }
         }
     }
 })
