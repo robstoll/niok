@@ -79,13 +79,6 @@ subprojects {
         compile kotlinStdlib()
         compile kotlinReflect()
     }
-
-    if (JavaVersion.current() >= JavaVersion.VERSION_1_9) {
-        java {
-            sourceCompatibility = JavaVersion.VERSION_1_9
-            targetCompatibility = JavaVersion.VERSION_1_9
-        }
-    }
 }
 
 
