@@ -55,13 +55,14 @@ inline fun Path.createFileIfNotExists(vararg fileAttributes: FileAttribute<*>): 
         // windows seems to throw an AccessDeniedException in case it was a directory
         try {
             if (isDirectory) this else throw e
-        } catch (e: Throwable) {
+        } catch (es: SecurityException) {
             throw e
         }
     }
 
 
 @PublishedApi
+@Suppress("FunctionMaxLength")
 internal inline fun Path.swallowFileAlreadyExistsException(action: Path.() -> Unit) =
     apply {
         try {
