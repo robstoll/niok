@@ -9,6 +9,8 @@ comments:
         excludes: "**/src/test/**"
     UndocumentedPublicFunction:
         excludes: "**/src/test/**"
+    AbsentOrWrongFileLicense:
+        active: false
 
 complexity:
     ComplexInterface:
