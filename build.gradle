@@ -4,7 +4,7 @@ buildscript {
 
     ext {
         // main
-        kotlin_version = '1.3.70'
+        kotlin_version = '1.3.71'
 
         // test
         atrium_version = '0.10.0'
