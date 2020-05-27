@@ -16,7 +16,7 @@ buildscript {
         detekt_version = '1.9.1'
 
         // project setup
-        tutteli_plugins_version = '0.32.1'
+        tutteli_plugins_version = '0.33.1'
     }
 
     repositories {
