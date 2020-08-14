@@ -38,7 +38,7 @@ buildscript {
 
 apply plugin: "ch.tutteli.project.utils"
 apply plugin: 'ch.tutteli.kotlin.utils'
-kotlinutils.kotlinVersion = kotlin_version
+kotlinutils.kotlinVersion = 1.4.0
 
 repositories {
     mavenCentral()
