@@ -1,8 +1,8 @@
 package ch.tutteli.niok
 
-import ch.tutteli.atrium.api.fluent.en_GB.exists
-import ch.tutteli.atrium.api.fluent.en_GB.isDirectory
-import ch.tutteli.atrium.api.fluent.en_GB.isRegularFile
+import ch.tutteli.atrium.api.fluent.en_GB.jdk8.exists
+import ch.tutteli.atrium.api.fluent.en_GB.jdk8.isDirectory
+import ch.tutteli.atrium.api.fluent.en_GB.jdk8.isRegularFile
 import ch.tutteli.atrium.api.fluent.en_GB.toBe
 import ch.tutteli.atrium.api.verbs.expect
 import ch.tutteli.spek.extensions.memoizedTempFolder
