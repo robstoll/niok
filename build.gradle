@@ -9,7 +9,7 @@ buildscript {
         kotlin_version = '1.4.21'
 
         // test
-        atrium_version = '0.14.0'
+        atrium_version = '0.15.0'
         tutteli_spek_extensions = '1.1.0'
 
         // detekt/sonarcloud
