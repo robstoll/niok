@@ -23,8 +23,6 @@ dependencies {
 }
 ```
 
-accordingly you can use `niok-android` as artifactId instead of `niok` if you want to use it in an android project.
-
 # Contribute
 You found a bug, a delegation to `Files` is missing or there is something else you would like to improve?
 Please [open an issue](https://github.com/robstoll/niok/issues/new), contributions are more than welcome :+1:
