@@ -252,16 +252,16 @@ inline fun Path.writeLines(
 
 
 /**
- * Delegates to [Files.newDirectoryStream]
+ * Delegates to [Files.newDirectoryStream].
  */
 inline fun Path.newDirectoryStream() = Files.newDirectoryStream(this)
 
 /**
- * Delegates to [Files.newDirectoryStream]
+ * Delegates to [Files.newDirectoryStream].
  */
 inline fun Path.newDirectoryStream(glob: String) = Files.newDirectoryStream(this, glob)
 
 /**
- * Delegates to [Files.newDirectoryStream]
+ * Delegates to [Files.newDirectoryStream].
  */
 inline fun Path.newDirectoryStream(filter: DirectoryStream.Filter<in Path>) = Files.newDirectoryStream(this, filter)

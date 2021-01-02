@@ -68,7 +68,6 @@ dependencies {
 apply plugin: "io.gitlab.arturbosch.detekt"
 detekt {
     failFast = true
-    input = files(subprojects*.collect { it.projectDir })
     config = files("$rootProject.projectDir/gradle/scripts/detekt.yml")
     reports {
         xml.enabled = true

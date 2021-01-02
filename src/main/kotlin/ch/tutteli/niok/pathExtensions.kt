@@ -83,11 +83,8 @@ internal inline fun Path.swallowFileAlreadyExistsException(action: Path.() -> Un
  *   pointing to a directory.
  */
 fun Path.reCreateDirectory() = apply {
-    if (Files.isDirectory(this, LinkOption.NOFOLLOW_LINKS)) {
-        deleteRecursively()
-        createDirectory()
-    } else {
-        throw IllegalStateException("$absolutePathAsString is not a directory")
-    }
+    check(Files.isDirectory(this, LinkOption.NOFOLLOW_LINKS)) { "$absolutePathAsString is not a directory" }
+    deleteRecursively()
+    createDirectory()
 }
 
