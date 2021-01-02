@@ -250,3 +250,18 @@ inline fun Path.writeLines(
     vararg openOptions: OpenOption
 ): Path = Files.write(this, lines, charset, *openOptions)
 
+
+/**
+ * Delegates to [Files.newDirectoryStream]
+ */
+inline fun Path.newDirectoryStream() = Files.newDirectoryStream(this)
+
+/**
+ * Delegates to [Files.newDirectoryStream]
+ */
+inline fun Path.newDirectoryStream(glob: String) = Files.newDirectoryStream(this, glob)
+
+/**
+ * Delegates to [Files.newDirectoryStream]
+ */
+inline fun Path.newDirectoryStream(filter: DirectoryStream.Filter<in Path>) = Files.newDirectoryStream(this, filter)
