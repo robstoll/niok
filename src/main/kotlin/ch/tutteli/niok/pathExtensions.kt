@@ -2,6 +2,8 @@
 
 package ch.tutteli.niok
 
+import java.nio.file.Files
+import java.nio.file.LinkOption
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.attribute.FileAttribute
@@ -34,7 +36,7 @@ fun Path.newDirectory(dir: String, vararg fileAttributes: FileAttribute<*>) =
     resolve(dir).createDirectory(*fileAttributes)
 
 /**
- * Resolve the given [file] and calls [createDirectory].
+ * Resolve the given [file] and calls [createFile].
  */
 fun Path.newFile(file: String, vararg fileAttributes: FileAttribute<*>) =
     resolve(file).createFile(*fileAttributes)
@@ -71,3 +73,21 @@ internal inline fun Path.swallowFileAlreadyExistsException(action: Path.() -> Un
             // can be ignored
         }
     }
+
+/**
+ * Deletes the directory recursively and creates a new empty one at the same place.
+ *
+ * This function does not follow symlinks, if the path points to a directory via symlink then this function throws.
+ *
+ * @throws IllegalStateException In case this Path is not a directory - also throws if it is a symbolic link
+ *   pointing to a directory.
+ */
+fun Path.reCreateDirectory() = apply {
+    if (Files.isDirectory(this, LinkOption.NOFOLLOW_LINKS)) {
+        deleteRecursively()
+        createDirectory()
+    } else {
+        throw IllegalStateException("$absolutePathAsString is not a directory")
+    }
+}
+
