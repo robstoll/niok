@@ -33,6 +33,7 @@ buildscript {
         classpath "ch.tutteli:tutteli-gradle-publish:$tutteli_plugins_version"
         classpath "ch.tutteli:tutteli-gradle-spek:$tutteli_plugins_version"
         classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.0"
     }
 }
 
@@ -52,6 +53,7 @@ apply plugin: 'ch.tutteli.spek'
 
 apply plugin: 'ch.tutteli.kotlin.module.info'
 apply plugin: 'ch.tutteli.publish'
+apply plugin: "org.sonarqube"
 
 sourceCompatibility = 8
 targetCompatibility = 8
@@ -74,6 +76,23 @@ detekt {
     }
 }
 
+sonarqube {
+    properties {
+        property 'sonar.host.url', 'https://sonarcloud.io'
+        property 'sonar.organization', 'robstoll-github'
+        property 'sonar.projectKey', 'robstoll_niok'
+        property 'sonar.projectVersion', rootProject.version
+        property 'sonar.kotlin', 'detekt.reportPaths=build/reports/detekt/detekt.xml'
+        property 'sonar.sources', 'src/main/kotlin'
+        property 'sonar.tests', 'src/test/kotlin'
+        property 'sonar.coverage', 'jacoco.xmlReportPaths=build/reports/jacoco/report.xml'
+        property 'sonar.verbose', 'true'
+    }
+}
+tasks.named("sonarqube").configure {
+    dependsOn(tasks.named("detekt"))
+}
+
 /*
 
 Release & deploy a commit
@@ -82,7 +101,7 @@ export NIOK_PREVIOUS_VERSION=1.3.4
 export NIOK_VERSION=1.4.0
 perl -0777 -i \
   -pe "s@$NIOK_PREVIOUS_VERSION@$NIOK_VERSION@g;" \
-  -pe "s/project.version = '$NIOK_VERSION-SNAPSHOT'/rootProject.version = '$NIOK_VERSION'/;" \
+  -pe "s/rootProject.version = '$NIOK_VERSION-SNAPSHOT'/rootProject.version = '$NIOK_VERSION'/;" \
   ./build.gradle
 perl -0777 -i \
   -pe "s@$NIOK_PREVIOUS_VERSION@$NIOK_VERSION@g;" \
