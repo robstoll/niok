@@ -63,7 +63,6 @@ object ReCreateSpec : Spek({
         it("an empty directory - deletes and reCreates") {
             val e = tempFolder.resolve("e")
             expect(e).isDirectory()
-            e.isDirectory
             e.reCreateDirectory()
             expect(e) {
                 isDirectory()
