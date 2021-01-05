@@ -14,6 +14,7 @@ buildscript {
 
         // detekt/sonarcloud
         detekt_version = '1.15.0'
+        sonarqube_version = '3.0'
 
         // project setup
         tutteli_plugins_version = '0.33.1'
@@ -33,7 +34,7 @@ buildscript {
         classpath "ch.tutteli:tutteli-gradle-publish:$tutteli_plugins_version"
         classpath "ch.tutteli:tutteli-gradle-spek:$tutteli_plugins_version"
         classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
-        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.0"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:$sonarqube_version"
     }
 }
 
