@@ -6,7 +6,7 @@ import ch.tutteli.spek.extensions.memoizedTempFolder
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.lifecycle.CachingMode
 import org.spekframework.spek2.style.specification.describe
-import java.nio.file.Files
+import java.nio.file.Files.list
 
 object ReCreateSpec : Spek({
     val tempFolder by memoizedTempFolder(CachingMode.SCOPE) {
@@ -46,7 +46,7 @@ object ReCreateSpec : Spek({
             expect(b) {
                 isDirectory()
                 //TODO replace with function from Atrium with 0.16.0
-                feature("findFirstFile") { Files.list(this).findFirst() }.isEmpty()
+                feature("findFirstFile") { list(this).findFirst() }.isEmpty()
             }
         }
 
@@ -57,7 +57,7 @@ object ReCreateSpec : Spek({
             expect(d) {
                 isDirectory()
                 //TODO replace with function from Atrium with 0.16.0
-                feature("findFirstFile") { java.nio.file.Files.list(this).findFirst() }.isEmpty()
+                feature("findFirstFile") { list(this).findFirst() }.isEmpty()
             }
         }
         it("an empty directory - deletes and reCreates") {
@@ -68,7 +68,7 @@ object ReCreateSpec : Spek({
             expect(e) {
                 isDirectory()
                 //TODO replace with function from Atrium with 0.16.0
-                feature("findFirstFile") { java.nio.file.Files.list(this).findFirst() }.isEmpty()
+                feature("findFirstFile") { list(this).findFirst() }.isEmpty()
             }
         }
     }
