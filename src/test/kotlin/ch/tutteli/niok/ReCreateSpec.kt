@@ -2,11 +2,13 @@ package ch.tutteli.niok
 
 import ch.tutteli.atrium.api.fluent.en_GB.*
 import ch.tutteli.atrium.api.verbs.expect
+import ch.tutteli.atrium.creating.Expect
 import ch.tutteli.spek.extensions.memoizedTempFolder
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.lifecycle.CachingMode
 import org.spekframework.spek2.style.specification.describe
-import java.nio.file.Files.list
+import java.nio.file.Files
+import java.nio.file.Path
 
 object ReCreateSpec : Spek({
     val tempFolder by memoizedTempFolder(CachingMode.SCOPE) {
@@ -16,6 +18,13 @@ object ReCreateSpec : Spek({
         val e = newDirectory("e")
         newSymbolicLink("f", e)
     }
+
+    //TODO replace with function from Atrium with 0.16.0
+    fun Expect<Path>.isEmptyDirectory() =
+        isDirectory().and
+            .feature("findFirstFile", { Files.list(this).use { it.findFirst() } }) {
+                isEmpty()
+            }
 
     describe("reCreateDirectory") {
 
@@ -43,32 +52,21 @@ object ReCreateSpec : Spek({
             val b = tempFolder.resolve("b")
             expect(b).isDirectory()
             b.reCreateDirectory()
-            expect(b) {
-                isDirectory()
-                //TODO replace with function from Atrium with 0.16.0
-                feature("findFirstFile") { list(this).findFirst() }.isEmpty()
-            }
+            expect(b) { isEmptyDirectory() }
         }
 
         it("an non empty directory with sub-dirs - deletes recursively and reCreates") {
             val d = tempFolder.resolve("d")
             expect(d).isDirectory()
             d.reCreateDirectory()
-            expect(d) {
-                isDirectory()
-                //TODO replace with function from Atrium with 0.16.0
-                feature("findFirstFile") { list(this).findFirst() }.isEmpty()
-            }
+            expect(d) { isEmptyDirectory() }
         }
         it("an empty directory - deletes and reCreates") {
             val e = tempFolder.resolve("e")
             expect(e).isDirectory()
             e.reCreateDirectory()
-            expect(e) {
-                isDirectory()
-                //TODO replace with function from Atrium with 0.16.0
-                feature("findFirstFile") { list(this).findFirst() }.isEmpty()
-            }
+            expect(e) { isEmptyDirectory() }
         }
     }
+
 })
