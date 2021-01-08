@@ -77,13 +77,17 @@ internal inline fun Path.swallowFileAlreadyExistsException(action: Path.() -> Un
 /**
  * Deletes the directory recursively and creates a new empty one at the same place.
  *
+ * The directory is also created in case this Path does not exist.
+ * However, it will fail if parent directories don't exist either.
  * This function does not follow symlinks, if the path points to a directory via symlink then this function throws.
  *
- * @throws IllegalStateException In case this Path is not a directory - also throws if it is a symbolic link
+ * @throws IllegalStateException In case this Path exists but is not a directory - also throws if it is a symbolic link
  *   pointing to a directory.
+ * @throws java.nio.file.NoSuchFileException In case the parent directory does not exist.
  */
 fun Path.reCreateDirectory() = apply {
-    check(Files.isDirectory(this, LinkOption.NOFOLLOW_LINKS)) { "$absolutePathAsString is not a directory" }
+    val exists = this.exists
+    check(!exists || Files.isDirectory(this, LinkOption.NOFOLLOW_LINKS)) { "$absolutePathAsString is not a directory" }
     deleteRecursively()
     createDirectory()
 }

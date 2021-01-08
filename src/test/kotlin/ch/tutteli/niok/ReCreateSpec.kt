@@ -28,6 +28,26 @@ object ReCreateSpec : Spek({
 
     describe("reCreateDirectory") {
 
+        it("non-existing directory in existing directory - creates the directory") {
+            val e = tempFolder.resolve("e")
+            expect(e).isDirectory()
+            val a = e.resolve("a")
+            a.reCreateDirectory()
+            expect(a) { isEmptyDirectory() }
+            expect(e).exists()
+        }
+
+        it("non-existing directory in non-existing directory - throws IllegalStateException") {
+            val e = tempFolder.resolve("nonExisting")
+            expect(e).existsNot()
+            val a = e.resolve("a")
+            expect {
+                a.reCreateDirectory()
+            }.toThrow<java.nio.file.NoSuchFileException> {
+                messageContains(a.absolutePathAsString)
+            }
+        }
+
         it("a file - throws IllegalStateException") {
             val a = tempFolder.resolve("a.txt")
             expect(a).isRegularFile()
