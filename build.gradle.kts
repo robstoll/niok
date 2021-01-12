@@ -65,11 +65,11 @@ tasks.register("dokka") {
     doLast {
         val kdoc = docsDir.resolve("kdoc")
         kdoc.deleteRecursively()
-        docsDir.resolve("niok").renameTo(kdoc)
+        docsDir.resolve(project.name).renameTo(kdoc)
         listOf("scripts/navigation-pane.json", "scripts/pages.js").forEach { filePath ->
-            docsDir.resolve(filePath).rewrite("\"location\":\"niok/", "\"location\":\"kdoc/")
+            docsDir.resolve(filePath).rewrite("\"location\":\"${project.name}/", "\"location\":\"kdoc/")
         }
-        docsDir.resolve("navigation.html").rewrite("href=\"niok/", "href=\"kdoc/")
+        docsDir.resolve("navigation.html").rewrite("href=\"${project.name}/", "href=\"kdoc/")
     }
 }
 
