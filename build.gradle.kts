@@ -57,6 +57,9 @@ tasks.dokkaHtml.configure {
     }
 }
 
+fun File.rewrite(search: String, replace: String) =
+    writeText(readText().replace(search, replace))
+
 tasks.register("dokka") {
     dependsOn(tasks.dokkaHtml)
     doLast {
@@ -64,9 +67,9 @@ tasks.register("dokka") {
         kdoc.deleteRecursively()
         docsDir.resolve("niok").renameTo(kdoc)
         listOf("scripts/navigation-pane.json", "scripts/pages.js").forEach { filePath ->
-            val file = docsDir.resolve(filePath)
-            file.writeText(file.readText().replace("\"location\":\"niok/", "\"location\":\"kdoc/"))
+            docsDir.resolve(filePath).rewrite("\"location\":\"niok/", "\"location\":\"kdoc/")
         }
+        docsDir.resolve("navigation.html").rewrite("href=\"niok/", "href=\"kdoc/")
     }
 }
 
