@@ -63,8 +63,10 @@ tasks.register("dokka") {
         val kdoc = docsDir.resolve("kdoc")
         kdoc.deleteRecursively()
         docsDir.resolve("niok").renameTo(kdoc)
-        val file = docsDir.resolve("scripts/navigation-pane.json")
-        file.writeText(file.readText().replace("\"location\":\"niok/", "\"location\":\"kdoc/"))
+        listOf("scripts/navigation-pane.json", "scripts/pages.js").forEach { filePath ->
+            val file = docsDir.resolve(filePath)
+            file.writeText(file.readText().replace("\"location\":\"niok/", "\"location\":\"kdoc/"))
+        }
     }
 }
 
