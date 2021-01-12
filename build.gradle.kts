@@ -1,5 +1,6 @@
 import java.net.URI
 import java.net.URL
+import java.nio.file.Files
 
 buildscript {
     // needs to be defined in here because otherwise tutteli-publish plugin does not have this information
@@ -56,10 +57,14 @@ tasks.dokkaHtml.configure {
     }
 }
 
-tasks.register("dokka"){
+tasks.register("dokka") {
     dependsOn(tasks.dokkaHtml)
-    doLast{
-        docsDir.resolve("niok").renameTo(docsDir.resolve("kdoc"))
+    doLast {
+        val kdoc = docsDir.resolve("kdoc")
+        kdoc.deleteRecursively()
+        docsDir.resolve("niok").renameTo(kdoc)
+        val file = docsDir.resolve("scripts/navigation-pane.json")
+        file.writeText(file.readText().replace("\"location\":\"niok/", "\"location\":\"kdoc/"))
     }
 }
 
