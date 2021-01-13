@@ -85,7 +85,7 @@ sonarqube {
         property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.organization", "robstoll-github")
         property("sonar.projectKey", "robstoll_niok")
-        property("sonar.projectVersion', rootProject.versio")
+        property("sonar.projectVersion", rootProject.version)
         property("sonar.kotlin", "detekt.reportPaths=build/reports/detekt/detekt.xml")
         property("sonar.sources", "src/main/kotlin")
         property("sonar.tests", "src/test/kotlin")
