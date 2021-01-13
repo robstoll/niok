@@ -11,7 +11,7 @@ provides additional functions.
 
 # Installation
 
-Niok is published to maven central, jcenter and [bintray](https://bintray.com/robstoll/tutteli-jars/noik).
+Niok is published to maven central, jcenter and [bintray](https://bintray.com/robstoll/tutteli-jars/niok).
 Following an example if you use gradle and jcenter:
 
 ```

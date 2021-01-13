@@ -1,11 +1,10 @@
 import java.net.URI
 import java.net.URL
-import java.nio.file.Files
 
 buildscript {
     // needs to be defined in here because otherwise tutteli-publish plugin does not have this information
     rootProject.group = "ch.tutteli.niok"
-    rootProject.version = "1.4.1"
+    rootProject.version = "1.5.0-SNAPSHOT"
     rootProject.description = "API for java.nio.file in a Kotlin idiomatic way"
 }
 
@@ -103,11 +102,14 @@ tasks.named("sonarqube").configure {
 Release & deploy a commit
 --------------------------------
 export NIOK_PREVIOUS_VERSION=1.4.1
-export NIOK_VERSION=1.4.1
+export NIOK_VERSION=1.5.0
+find ./ -name "*.md" | xargs perl -0777 -i \
+   -pe "s@$NIOK_PREVIOUS_VERSION@$NIOK_VERSION@g;" \
+   -pe "s@tree/master@tree/v$NIOK_VERSION@g;" \
 perl -0777 -i \
   -pe "s@$NIOK_PREVIOUS_VERSION@$NIOK_VERSION@g;" \
-  -pe "s/rootProject.version = '$NIOK_VERSION-SNAPSHOT'/rootProject.version = '$NIOK_VERSION'/;" \
-  ./build.gradle
+  -pe "s/rootProject.version = \"$NIOK_VERSION-SNAPSHOT\"/rootProject.version = \"$NIOK_VERSION\"/;" \
+  ./build.gradle.kts
 perl -0777 -i \
   -pe "s@$NIOK_PREVIOUS_VERSION@$NIOK_VERSION@g;" \
   -pe 's/(<!-- for master -->\n)\n([\S\s]*?)(\n<!-- for a specific release -->\n)<!--\n([\S\s]*?)-->\n(\n# Niok)/$1<!--\n$2-->$3\n$4\n$5/;' \
@@ -133,9 +135,9 @@ export NIOK_NEXT_VERSION=1.5.0
 find ./ -name "*.md" | xargs perl -0777 -i \
    -pe "s@tree/v$NIOK_VERSION@tree/master@g;";
 perl -0777 -i \
-  -pe "s/rootProject.version = "$NIOK_VERSION"/rootProject.version = "$NIOK_NEXT_VERSION-SNAPSHOT"/;" \
+  -pe "s/rootProject.version = \"$NIOK_VERSION\"/rootProject.version = \"$NIOK_NEXT_VERSION-SNAPSHOT\"/;" \
   -pe "s/NIOK_VERSION=$NIOK_VERSION/NIOK_VERSION=$NIOK_NEXT_VERSION/;" \
-  ./build.gradle
+  ./build.gradle.kts
 perl -0777 -i \
   -pe 's/(<!-- for master -->\n)<!--\n([\S\s]*?)-->(\n<!-- for a specific release -->)\n([\S\s]*?)\n(\n# Niok)/$1\n$2$3\n<!--$4-->\n$5/;' \
   ./README.md
