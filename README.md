@@ -32,6 +32,10 @@ dependencies {
 }
 ```
 
+# Documentation
+
+Visit [https://robstoll.github.io/niok/kdoc](https://robstoll.github.io/niok/kdoc).
+
 # Contribute
 You found a bug, a delegation to `Files` is missing or there is something else you would like to improve?
 Please [open an issue](https://github.com/robstoll/niok/issues/new), contributions are more than welcome :+1:
