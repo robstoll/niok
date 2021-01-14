@@ -18,7 +18,7 @@ plugins {
     id("ch.tutteli.publish") version tutteliGradleVersion
     id("ch.tutteli.spek") version tutteliGradleVersion
     id("io.gitlab.arturbosch.detekt") version "1.15.0"
-    id("org.sonarqube") version "3.0"
+    id("org.sonarqube") version "3.1"
 }
 
 repositories {
