@@ -16,7 +16,7 @@ fun Path.appendBytes(array: ByteArray): Unit =
     this.toFile().appendBytes(array)
 
 /**
- * Delegates to [kotlin.io.appendText]
+ * Delegates to [kotlin.io.appendText].
  */
 fun Path.appendText(text: String, charset: Charset = Charsets.UTF_8): Unit =
     this.toFile().appendText(text, charset)
