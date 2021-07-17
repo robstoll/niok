@@ -11,7 +11,7 @@ buildscript {
 plugins {
     kotlin("jvm") version "1.4.21"
     id("org.jetbrains.dokka") version "1.5.0"
-    val tutteliGradleVersion = "0.33.1"
+    val tutteliGradleVersion = "1.0.0"
     id("ch.tutteli.kotlin.module.info") version tutteliGradleVersion
     id("ch.tutteli.kotlin.utils") version tutteliGradleVersion
     id("ch.tutteli.project.utils") version tutteliGradleVersion
