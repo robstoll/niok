@@ -3,6 +3,7 @@ out
 .gradle
 .idea
 *.iml
+.history
 
 # local repo for dev
 repo
