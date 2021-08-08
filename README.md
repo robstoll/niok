@@ -22,11 +22,10 @@ provides additional functions.
 
 # Installation
 
-Niok is published to maven central, jcenter and [bintray](https://bintray.com/robstoll/tutteli-jars/niok). 
-Following an example if you use gradle and jcenter:
+Niok is published to maven central. Following an example how to use it
 
 ```
-repositories { jcenter() }
+repositories { mavenCentral() }
 dependencies {
     implementation 'ch.tutteli.niok:niok:1.4.1'
 }
