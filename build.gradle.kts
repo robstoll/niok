@@ -11,12 +11,12 @@ buildscript {
 plugins {
     kotlin("jvm") version "1.4.21"
     id("org.jetbrains.dokka") version "1.5.0"
-    val tutteliGradleVersion = "0.33.1"
-    id("ch.tutteli.kotlin.module.info") version tutteliGradleVersion
-    id("ch.tutteli.kotlin.utils") version tutteliGradleVersion
-    id("ch.tutteli.project.utils") version tutteliGradleVersion
-    id("ch.tutteli.publish") version tutteliGradleVersion
-    id("ch.tutteli.spek") version tutteliGradleVersion
+    val tutteliGradleVersion = "2.0.0"
+    id("ch.tutteli.gradle.plugins.kotlin.module.info") version tutteliGradleVersion
+    id("ch.tutteli.gradle.plugins.kotlin.utils") version tutteliGradleVersion
+    id("ch.tutteli.gradle.plugins.project.utils") version tutteliGradleVersion
+    id("ch.tutteli.gradle.plugins.publish") version tutteliGradleVersion
+    id("ch.tutteli.gradle.plugins.spek") version tutteliGradleVersion
     id("io.gitlab.arturbosch.detekt") version "1.17.1"
     id("org.sonarqube") version "3.3"
 }
@@ -36,7 +36,7 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
 
-    val excludeKotlin: (ExternalModuleDependency).() -> Unit = {
+    val excludeKotlin: ExternalModuleDependency.() -> Unit = {
         exclude(group = "org.jetbrains.kotlin")
     }
     testImplementation("ch.tutteli.atrium:atrium-fluent-en_GB:0.16.0", excludeKotlin)
@@ -73,10 +73,13 @@ tasks.register("dokka") {
 }
 
 detekt {
-    failFast = true
+    buildUponDefaultConfig = true
     config = files("${rootProject.projectDir}/gradle/scripts/detekt.yml")
     reports {
         xml.enabled = true
+        html.enabled = false
+        sarif.enabled = false
+        txt.enabled = false
     }
 }
 
