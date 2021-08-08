@@ -1,6 +1,6 @@
 <!-- for master -->
 
-[![Download](https://api.bintray.com/packages/robstoll/tutteli-jars/niok/images/download.svg)](https://bintray.com/robstoll/tutteli-jars/niok/_latestVersion)
+[![Download](https://img.shields.io/badge/Download-1.4.1-%23007ec6)](https://search.maven.org/artifact/ch.tutteli.niok/niok/1.4.1/jar)
 [![Apache license](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)](http://opensource.org/licenses/Apache2.0)
 [![Build Status Ubuntu](https://github.com/robstoll/niok/workflows/Ubuntu/badge.svg?event=push)](https://github.com/robstoll/niok/actions?query=workflow%3AUbuntu+branch%3Amaster)
 [![Build Status Windows](https://github.com/robstoll/niok/workflows/Windows/badge.svg?event=push)](https://github.com/robstoll/niok/actions?query=workflow%3AWindows+branch%3Amaster)
@@ -8,7 +8,7 @@
 
 <!-- for a specific release -->
 <!--
-[![Download](https://img.shields.io/badge/Download-1.4.1-%23007ec6)](https://bintray.com/robstoll/tutteli-jars/niok/1.4.1 "Download 1.4.1 from Bintray")
+[![Download](https://img.shields.io/badge/Download-1.4.1-%23007ec6)](https://search.maven.org/artifact/ch.tutteli.niok/niok/1.4.1/jar)
 [![Apache license](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)](http://opensource.org/licenses/Apache2.0)
 -->
 

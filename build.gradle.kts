@@ -23,8 +23,6 @@ plugins {
 
 repositories {
     mavenCentral()
-    jcenter()
-    maven { url = URI("https://dl.bintray.com/robstoll/tutteli-jars") }
 }
 
 java {
