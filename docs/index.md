@@ -1,4 +1,4 @@
-[![Download](https://api.bintray.com/packages/robstoll/tutteli-jars/niok/images/download.svg)](https://bintray.com/robstoll/tutteli-jars/niok/_latestVersion)
+[![Download](https://img.shields.io/badge/Download-1.4.1-%23007ec6)](https://search.maven.org/artifact/ch.tutteli.niok/niok/1.4.1/jar)
 [![Apache license](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)](http://opensource.org/licenses/Apache2.0)
 
 # Niok - java.nio.file for Kotlin
@@ -11,11 +11,10 @@ provides additional functions.
 
 # Installation
 
-Niok is published to maven central, jcenter and [bintray](https://bintray.com/robstoll/tutteli-jars/niok).
-Following an example if you use gradle and jcenter:
+Niok is published to maven central. Following an example how to use it
 
 ```
-repositories { jcenter() }
+repositories { mavenCentral() }
 dependencies {
     implementation 'ch.tutteli.niok:niok:1.4.1'
 }
