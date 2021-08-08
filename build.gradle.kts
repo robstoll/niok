@@ -13,8 +13,6 @@ plugins {
     id("org.jetbrains.dokka") version "1.5.0"
     val tutteliGradleVersion = "2.0.0"
     id("ch.tutteli.gradle.plugins.kotlin.module.info") version tutteliGradleVersion
-    id("ch.tutteli.gradle.plugins.kotlin.utils") version tutteliGradleVersion
-    id("ch.tutteli.gradle.plugins.project.utils") version tutteliGradleVersion
     id("ch.tutteli.gradle.plugins.publish") version tutteliGradleVersion
     id("ch.tutteli.gradle.plugins.spek") version tutteliGradleVersion
     id("io.gitlab.arturbosch.detekt") version "1.17.1"
