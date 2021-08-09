@@ -33,7 +33,7 @@ dependencies {
 
 # Documentation
 
-Visit [https://robstoll.github.io/niok/kdoc](https://robstoll.github.io/niok/kdoc/ch.tutteli.niok/index.html).
+Visit [https://robstoll.github.io/niok/kdoc](https://robstoll.github.io/niok/kdoc/).
 
 # Contribute
 You found a bug, a delegation to `Files` is missing or there is something else you would like to improve?
