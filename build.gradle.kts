@@ -41,7 +41,7 @@ dependencies {
     testImplementation("ch.tutteli.spek:tutteli-spek-extensions:1.2.1", excludeKotlin)
 }
 
-val docsDir = projectDir.resolve("docs")
+val docsDir = projectDir.resolve("docs/kdoc")
 tasks.dokkaHtml.configure {
     outputDirectory.set(docsDir)
     dokkaSourceSets {
@@ -58,20 +58,20 @@ tasks.dokkaHtml.configure {
 fun File.rewrite(search: String, replace: String) =
     writeText(readText().replace(search, replace))
 
+fun File.rewritesRegex(vararg patterns: Pair<Regex, String>) {
+    val content = readText()
+    val newContent = patterns.fold(content) { acc, pair ->
+        val (regex, replace) = pair
+        acc.replace(regex, replace)
+    }
+    writeText(newContent)
+}
+
 val dokka = tasks.register("dokka") {
     dependsOn(tasks.dokkaHtml)
-    doLast {
-        val kdoc = docsDir.resolve("kdoc")
-        kdoc.deleteRecursively()
-        docsDir.resolve(project.name).renameTo(kdoc)
-        listOf("scripts/navigation-pane.json", "scripts/pages.js").forEach { filePath ->
-            docsDir.resolve(filePath).rewrite("\"location\":\"${project.name}/", "\"location\":\"kdoc/")
-        }
-        docsDir.resolve("navigation.html").rewrite("href=\"${project.name}/", "href=\"kdoc/")
-    }
 }
 tasks.register<Jar>("javaDoc") {
-    archiveClassifier.set( "javadoc")
+    archiveClassifier.set("javadoc")
     dependsOn(dokka)
     doFirst {
         from(docsDir)
