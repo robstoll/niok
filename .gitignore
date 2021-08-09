@@ -4,6 +4,7 @@ out
 .idea
 *.iml
 .history
+*.hprof
 
 # local repo for dev
 repo
