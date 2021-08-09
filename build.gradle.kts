@@ -16,6 +16,7 @@ plugins {
     id("ch.tutteli.gradle.plugins.spek") version tutteliGradleVersion
     id("io.gitlab.arturbosch.detekt") version "1.17.1"
     id("org.sonarqube") version "3.3"
+    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 }
 
 repositories {
@@ -95,10 +96,20 @@ tasks.named("sonarqube").configure {
     dependsOn(tasks.named("detekt"))
 }
 
+nexusPublishing {
+    repositories {
+        sonatype()
+    }
+}
+
 /*
 
 Release & deploy a commit
 --------------------------------
+1. update master:
+
+Either use the following commands or the manual steps below
+
 export NIOK_PREVIOUS_VERSION=1.4.1
 export NIOK_VERSION=1.5.0
 find ./ -name "*.md" | xargs perl -0777 -i \
@@ -114,16 +125,22 @@ perl -0777 -i \
   ./README.md
 git commit -a -m "v$NIOK_VERSION"
 
-1. search for X.Y.Z-SNAPSHOT and replace with X.Y.Z
-2. update master:
-    b) commit (modified build.gradle and README.md)
-    c) git tag vX.Y.Z
-    d) git push origin vX.Y.Z
-4. deploy to bintray:
-    a) java -version 2>&1 | grep "version \"11" && CI=true ./gradlew clean publishToBintray
-    b) Log in to bintray, check that there are 10 artifacts which needs to be published; publish them
-    c) synchronise to maven central
-5. create release on github
+alternatively the manual steps:
+  a) search for X.Y.Z-SNAPSHOT and replace with X.Y.Z
+  b) update master:
+
+2. prepare release on github
+   a) commit (modified build.gradle and README.md)
+   b) git tag vX.Y.Z
+   c) git push origin vX.Y.Z
+
+3. deploy to maven central:
+(assumes you have an alias named gr pointing to ./gradlew)
+    a) java -version 2>&1 | grep "version \"11" && CI=true gr clean publishToSonatype
+    b) Log into https://oss.sonatype.org/#stagingRepositories
+    c) check if staging repo is ok
+    d) gr closeAndReleaseSonatypeStagingRepository
+4. create release on github
 
 Prepare next dev cycle
 -----------------------
