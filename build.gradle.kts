@@ -1,11 +1,9 @@
 import java.net.URL
-import java.nio.file.Files
-import  java.nio.file.StandardCopyOption
 
 buildscript {
     // needs to be defined in here because otherwise tutteli-publish plugin does not have this information
     rootProject.group = "ch.tutteli.niok"
-    rootProject.version = "1.4.3"
+    rootProject.version = "1.5.0-SNAPSHOT"
     rootProject.description = "API for java.nio.file in a Kotlin idiomatic way"
 }
 
@@ -104,12 +102,16 @@ nexusPublishing {
 
 Release & deploy a commit
 --------------------------------
-1. update master:
+1. generate dokka
+a) gr dokka
+b) check if output/links are still good (use intellij's http server via -> right click -> open in -> browser)
+
+2. update master:
 
 Either use the following commands or the manual steps below
 
 export NIOK_PREVIOUS_VERSION=1.4.3
-export NIOK_VERSION=1.4.3
+export NIOK_VERSION=1.5.0
 find ./ -name "*.md" | xargs perl -0777 -i \
    -pe "s@$NIOK_PREVIOUS_VERSION@$NIOK_VERSION@g;" \
    -pe "s@tree/v1.4.3@tree/v$NIOK_VERSION@g;"
@@ -125,16 +127,11 @@ git commit -a -m "v$NIOK_VERSION"
 
 alternatively the manual steps:
   a) search for X.Y.Z-SNAPSHOT and replace with X.Y.Z
-  b) update master:
+  b) commit (modified build.gradle and README.md)
 
-2. generate dokka
-a) gr dokka
-b) check if output/links are still good (use intellij's http server via -> right click -> open in -> browser)
-
-2. prepare release on github
-   a) commit (modified build.gradle and README.md)
-   b) git tag vX.Y.Z
-   c) git push origin vX.Y.Z
+3. prepare release on github
+   a) git tag vX.Y.Z
+   b) git push origin vX.Y.Z
 
 3. deploy to maven central:
 (assumes you have an alias named gr pointing to ./gradlew)
@@ -149,7 +146,7 @@ Prepare next dev cycle
 -----------------------
 
 export NIOK_VERSION=1.4.3
-export NIOK_NEXT_VERSION=1.4.3
+export NIOK_NEXT_VERSION=1.5.0
 find ./ -name "*.md" | xargs perl -0777 -i \
    -pe "s@tree/v$NIOK_VERSION@tree/v1.4.3@g;";
 perl -0777 -i \
