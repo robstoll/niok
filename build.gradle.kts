@@ -3,7 +3,7 @@ import java.net.URL
 buildscript {
     // needs to be defined in here because otherwise tutteli-publish plugin does not have this information
     rootProject.group = "ch.tutteli.niok"
-    rootProject.version = "1.5.0-SNAPSHOT"
+    rootProject.version = "1.4.2"
     rootProject.description = "API for java.nio.file in a Kotlin idiomatic way"
 }
 
@@ -111,10 +111,10 @@ Release & deploy a commit
 Either use the following commands or the manual steps below
 
 export NIOK_PREVIOUS_VERSION=1.4.1
-export NIOK_VERSION=1.5.0
+export NIOK_VERSION=1.4.2
 find ./ -name "*.md" | xargs perl -0777 -i \
    -pe "s@$NIOK_PREVIOUS_VERSION@$NIOK_VERSION@g;" \
-   -pe "s@tree/master@tree/v$NIOK_VERSION@g;" \
+   -pe "s@tree/v1.4.2@tree/v$NIOK_VERSION@g;"
 perl -0777 -i \
   -pe "s@$NIOK_PREVIOUS_VERSION@$NIOK_VERSION@g;" \
   -pe "s/rootProject.version = \"$NIOK_VERSION-SNAPSHOT\"/rootProject.version = \"$NIOK_VERSION\"/;" \
@@ -145,10 +145,10 @@ alternatively the manual steps:
 Prepare next dev cycle
 -----------------------
 
-export NIOK_VERSION=1.4.1
-export NIOK_NEXT_VERSION=1.5.0
+export NIOK_VERSION=1.4.2
+export NIOK_NEXT_VERSION=1.4.2
 find ./ -name "*.md" | xargs perl -0777 -i \
-   -pe "s@tree/v$NIOK_VERSION@tree/master@g;";
+   -pe "s@tree/v$NIOK_VERSION@tree/v1.4.2@g;";
 perl -0777 -i \
   -pe "s/rootProject.version = \"$NIOK_VERSION\"/rootProject.version = \"$NIOK_NEXT_VERSION-SNAPSHOT\"/;" \
   -pe "s/NIOK_VERSION=$NIOK_VERSION/NIOK_VERSION=$NIOK_NEXT_VERSION/;" \
@@ -160,7 +160,7 @@ git commit -a -m "prepare dev cycle of $NIOK_NEXT_VERSION"
 
 1. point to master
    a) search for `tag=vX.Y.Z` and replace it with `branch=master`
-   b) search for `tree/vX.Y.Z` and replace it with `tree/master`
+   b) search for `tree/vX.Y.Z` and replace it with `tree/v1.4.2`
 2. search for X.Y.Z and replace with X.Y.Z-SNAPSHOT
 3. commit & push changes
 
