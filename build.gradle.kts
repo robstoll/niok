@@ -55,18 +55,6 @@ tasks.dokkaHtml.configure {
     }
 }
 
-fun File.rewrite(search: String, replace: String) =
-    writeText(readText().replace(search, replace))
-
-fun File.rewritesRegex(vararg patterns: Pair<Regex, String>) {
-    val content = readText()
-    val newContent = patterns.fold(content) { acc, pair ->
-        val (regex, replace) = pair
-        acc.replace(regex, replace)
-    }
-    writeText(newContent)
-}
-
 val dokka = tasks.register("dokka") {
     dependsOn(tasks.dokkaHtml)
 }
