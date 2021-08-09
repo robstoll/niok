@@ -1,3 +1,7 @@
 {
-  "extends": ["config:base", "github>robstoll/renovate-presets-jvm", ":switchToGradleLite"]
+    "extends": [
+        "config:base",
+        "github>robstoll/renovate-presets-jvm",
+        ":switchToGradleLite"
+    ]
 }

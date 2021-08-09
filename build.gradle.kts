@@ -1,7 +1,7 @@
 import java.net.URL
 
 buildscript {
-    // needs to be defined in here because otherwise tutteli-publish plugin does not have this information
+    // needs to be defined in here because otherwise tutteli-publish plugin does not have this information when applied
     rootProject.group = "ch.tutteli.niok"
     rootProject.version = "1.5.0-SNAPSHOT"
     rootProject.description = "API for java.nio.file in a Kotlin idiomatic way"
