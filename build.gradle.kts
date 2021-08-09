@@ -1,4 +1,6 @@
 import java.net.URL
+import java.nio.file.Files
+import  java.nio.file.StandardCopyOption
 
 buildscript {
     // needs to be defined in here because otherwise tutteli-publish plugin does not have this information
@@ -56,7 +58,7 @@ tasks.dokkaHtml.configure {
 fun File.rewrite(search: String, replace: String) =
     writeText(readText().replace(search, replace))
 
-tasks.register("dokka") {
+val dokka = tasks.register("dokka") {
     dependsOn(tasks.dokkaHtml)
     doLast {
         val kdoc = docsDir.resolve("kdoc")
@@ -66,6 +68,13 @@ tasks.register("dokka") {
             docsDir.resolve(filePath).rewrite("\"location\":\"${project.name}/", "\"location\":\"kdoc/")
         }
         docsDir.resolve("navigation.html").rewrite("href=\"${project.name}/", "href=\"kdoc/")
+    }
+}
+tasks.register<Jar>("javaDoc") {
+    archiveClassifier.set( "javadoc")
+    dependsOn(dokka)
+    doFirst {
+        from(docsDir)
     }
 }
 
@@ -129,6 +138,10 @@ git commit -a -m "v$NIOK_VERSION"
 alternatively the manual steps:
   a) search for X.Y.Z-SNAPSHOT and replace with X.Y.Z
   b) update master:
+
+2. generate dokka
+a) gr dokka
+b) check if output/links are still good (use intellij's http server via -> right click -> open in -> browser)
 
 2. prepare release on github
    a) commit (modified build.gradle and README.md)
