@@ -1,7 +1,7 @@
 package ch.tutteli.niok
 
-import ch.tutteli.atrium.api.fluent.en_GB.contains
-import ch.tutteli.atrium.api.fluent.en_GB.toBe
+import ch.tutteli.atrium.api.fluent.en_GB.toContain
+import ch.tutteli.atrium.api.fluent.en_GB.toEqual
 import ch.tutteli.atrium.api.verbs.expect
 import ch.tutteli.spek.extensions.memoizedTempFolder
 import org.spekframework.spek2.Spek
@@ -17,7 +17,7 @@ object AbsolutePathAsStringSpec : Spek({
     describe("absolute path") {
         it("returns the whole path") {
             val path = tempFolder.newFile("test")
-            expect(path.absolutePathAsString).toBe(path.toFile().absolutePath)
+            expect(path.absolutePathAsString).toEqual(path.toFile().absolutePath)
         }
     }
 
@@ -25,8 +25,8 @@ object AbsolutePathAsStringSpec : Spek({
         it("returns the whole path with ./ in it") {
             val path = tempFolder.newFile("./test")
             expect(path.absolutePathAsString) {
-                toBe(path.toFile().absolutePath)
-                contains(".${sep}test")
+                toEqual(path.toFile().absolutePath)
+                toContain(".${sep}test")
             }
         }
     }
@@ -36,8 +36,8 @@ object AbsolutePathAsStringSpec : Spek({
             val tmpDirName = tempFolder.tmpDir.fileNameAsString
             val path = tempFolder.newFile("../$tmpDirName/test")
             expect(path.absolutePathAsString) {
-                toBe(path.toFile().absolutePath)
-                contains("..$sep$tmpDirName${sep}test")
+                toEqual(path.toFile().absolutePath)
+                toContain("..$sep$tmpDirName${sep}test")
             }
         }
     }
@@ -45,7 +45,7 @@ object AbsolutePathAsStringSpec : Spek({
     describe("relative path") {
         it("returns the whole path") {
             val path = Paths.get("test")
-            expect(path.absolutePathAsString).toBe(File("test").absolutePath)
+            expect(path.absolutePathAsString).toEqual(File("test").absolutePath)
         }
     }
 
@@ -53,8 +53,8 @@ object AbsolutePathAsStringSpec : Spek({
         it("returns the whole path with ./") {
             val path = Paths.get("./test")
             expect(path.absolutePathAsString) {
-                toBe(File("./test").absolutePath)
-                contains(".${sep}test")
+                toEqual(File("./test").absolutePath)
+                toContain(".${sep}test")
             }
         }
     }
@@ -63,8 +63,8 @@ object AbsolutePathAsStringSpec : Spek({
         it("returns the whole path with ../ in it") {
             val path = Paths.get("../test")
             expect(path.absolutePathAsString) {
-                toBe(File("../test").absolutePath)
-                contains("..${sep}test")
+                toEqual(File("../test").absolutePath)
+                toContain("..${sep}test")
             }
         }
     }

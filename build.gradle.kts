@@ -34,7 +34,7 @@ dependencies {
     val excludeKotlin: ExternalModuleDependency.() -> Unit = {
         exclude(group = "org.jetbrains.kotlin")
     }
-    testImplementation("ch.tutteli.atrium:atrium-fluent-en_GB:0.16.0", excludeKotlin)
+    testImplementation("ch.tutteli.atrium:atrium-fluent-en_GB:0.17.0-RC1", excludeKotlin)
     testImplementation("ch.tutteli.spek:tutteli-spek-extensions:1.2.1", excludeKotlin)
 }
 val docsDir = projectDir.resolve("docs")

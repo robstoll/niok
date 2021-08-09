@@ -2,13 +2,10 @@ package ch.tutteli.niok
 
 import ch.tutteli.atrium.api.fluent.en_GB.*
 import ch.tutteli.atrium.api.verbs.expect
-import ch.tutteli.atrium.creating.Expect
 import ch.tutteli.spek.extensions.memoizedTempFolder
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.lifecycle.CachingMode
 import org.spekframework.spek2.style.specification.describe
-import java.nio.file.Files
-import java.nio.file.Path
 
 object ReCreateSpec : Spek({
     val tempFolder by memoizedTempFolder(CachingMode.SCOPE) {
@@ -19,73 +16,65 @@ object ReCreateSpec : Spek({
         newSymbolicLink("f", e)
     }
 
-    //TODO replace with function from Atrium with 0.16.0
-    fun Expect<Path>.isEmptyDirectory() =
-        isDirectory().and
-            .feature("findFirstFile", { Files.list(this).use { it.findFirst() } }) {
-                isEmpty()
-            }
-
     describe("reCreateDirectory") {
 
         it("non-existing directory in existing directory - creates the directory") {
             val e = tempFolder.resolve("e")
-            expect(e).isDirectory()
+            expect(e).toBeADirectory()
             val a = e.resolve("a")
             a.reCreateDirectory()
-            expect(a) { isEmptyDirectory() }
-            expect(e).exists()
+            expect(a) { toBeAnEmptyDirectory() }
+            expect(e).toExist()
         }
 
         it("non-existing directory in non-existing directory - throws IllegalStateException") {
             val e = tempFolder.resolve("nonExisting")
-            expect(e).existsNot()
+            expect(e).notToExist()
             val a = e.resolve("a")
             expect {
                 a.reCreateDirectory()
             }.toThrow<java.nio.file.NoSuchFileException> {
-                messageContains(a.absolutePathAsString)
+                messageToContain(a.absolutePathAsString)
             }
         }
 
         it("a file - throws IllegalStateException") {
             val a = tempFolder.resolve("a.txt")
-            expect(a).isRegularFile()
+            expect(a).toBeARegularFile()
             expect {
                 a.reCreateDirectory()
             }.toThrow<IllegalStateException> {
-                messageContains("a.txt is not a directory")
+                messageToContain("a.txt is not a directory")
             }
         }
         it("a symbolic link pointing to a directory - throws IllegalStateException") {
             val f = tempFolder.resolve("f")
-            //TODO replace with function from Atrium with 0.16.0
-            expect(f).feature { f(it::isSymbolicLink) }.toBe(true)
+            expect(f).toBeASymbolicLink()
             expect {
                 f.reCreateDirectory()
             }.toThrow<IllegalStateException> {
-                messageContains("f is not a directory")
+                messageToContain("f is not a directory")
             }
         }
 
         it("an non empty directory without sub-dirs - deletes recursively and reCreates") {
             val b = tempFolder.resolve("b")
-            expect(b).isDirectory()
+            expect(b).toBeADirectory()
             b.reCreateDirectory()
-            expect(b) { isEmptyDirectory() }
+            expect(b) { toBeAnEmptyDirectory() }
         }
 
         it("an non empty directory with sub-dirs - deletes recursively and reCreates") {
             val d = tempFolder.resolve("d")
-            expect(d).isDirectory()
+            expect(d).toBeADirectory()
             d.reCreateDirectory()
-            expect(d) { isEmptyDirectory() }
+            expect(d) { toBeAnEmptyDirectory() }
         }
         it("an empty directory - deletes and reCreates") {
             val e = tempFolder.resolve("e")
-            expect(e).isDirectory()
+            expect(e).toBeADirectory()
             e.reCreateDirectory()
-            expect(e) { isEmptyDirectory() }
+            expect(e) { toBeAnEmptyDirectory() }
         }
     }
 
