@@ -23,3 +23,6 @@ dependencies {
 # Documentation
 
 Visit [/kdoc](https://robstoll.github.io/niok/kdoc)
+
+# License
+Niok is licensed under [Apache 2.0](http://opensource.org/licenses/Apache2.0).

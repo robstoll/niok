@@ -42,6 +42,8 @@ dependencies {
 val docsDir = projectDir.resolve("docs/kdoc")
 tasks.dokkaHtml.configure {
     outputDirectory.set(docsDir)
+}
+tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
     dokkaSourceSets {
         configureEach {
             sourceLink {
