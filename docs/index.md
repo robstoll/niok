@@ -16,7 +16,7 @@ Niok is published to maven central. Following an example how to use it
 ```
 repositories { mavenCentral() }
 dependencies {
-    implementation 'ch.tutteli.niok:niok:1.4.3'
+    implementation("ch.tutteli.niok:niok:1.4.3")
 }
 ```
 
