@@ -3,7 +3,7 @@ import java.net.URL
 buildscript {
     // needs to be defined in here because otherwise tutteli-publish plugin does not have this information when applied
     rootProject.group = "ch.tutteli.niok"
-    rootProject.version = "1.4.4"
+    rootProject.version = "1.4.5-SNAPSHOT"
     rootProject.description = "API for java.nio.file in a Kotlin idiomatic way"
 }
 
@@ -114,7 +114,7 @@ b) check if output/links are still good (use intellij's http server via -> right
 Either use the following commands or the manual steps below
 
 export NIOK_PREVIOUS_VERSION=1.4.4
-export NIOK_VERSION=1.4.4
+export NIOK_VERSION=1.4.5
 find ./ -name "*.md" | xargs perl -0777 -i \
    -pe "s@$NIOK_PREVIOUS_VERSION@$NIOK_VERSION@g;" \
    -pe "s@tree/v1.4.4@tree/v$NIOK_VERSION@g;"
@@ -138,7 +138,7 @@ alternatively the manual steps:
 
 3. deploy to maven central:
 (assumes you have an alias named gr pointing to ./gradlew)
-    a) java -version 2>&1 | grep "version \"11" && CI=true gr clean publishToSonatype
+    a) java -version 2>&1 | grep "version \"11" && CI=true gr clean publishToSonatype closeAndReleaseSonatypeStagingRepository
     b) Log into https://oss.sonatype.org/#stagingRepositories
     c) check if staging repo is ok
     d) gr closeAndReleaseSonatypeStagingRepository (currently fails with `No staging repository with name sonatype created` needs to be done manually via Nexus gui)
@@ -149,7 +149,7 @@ Prepare next dev cycle
 -----------------------
 
 export NIOK_VERSION=1.4.4
-export NIOK_NEXT_VERSION=1.4.4
+export NIOK_NEXT_VERSION=1.4.5
 find ./ -name "*.md" | xargs perl -0777 -i \
    -pe "s@tree/v$NIOK_VERSION@tree/v1.4.4@g;";
 perl -0777 -i \
