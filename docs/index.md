@@ -1,4 +1,4 @@
-[![Download](https://img.shields.io/badge/Download-1.4.5-%23007ec6)](https://search.maven.org/artifact/ch.tutteli.niok/niok/1.4.5/jar)
+[![Download](https://img.shields.io/badge/Download-1.4.6-%23007ec6)](https://search.maven.org/artifact/ch.tutteli.niok/niok/1.4.6/jar)
 [![Apache license](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)](http://opensource.org/licenses/Apache2.0)
 
 # Niok - java.nio.file for Kotlin
@@ -16,7 +16,7 @@ Niok is published to maven central. Following an example how to use it
 ```
 repositories { mavenCentral() }
 dependencies {
-    implementation("ch.tutteli.niok:niok:1.4.5")
+    implementation("ch.tutteli.niok:niok:1.4.6")
 }
 ```
 
