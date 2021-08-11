@@ -8,7 +8,7 @@ buildscript {
 }
 
 plugins {
-    kotlin("jvm") version "1.4.21"
+    kotlin("jvm") version "1.5.21"
     id("org.jetbrains.dokka") version "1.5.0"
     val tutteliGradleVersion = "2.0.0"
     id("ch.tutteli.gradle.plugins.kotlin.module.info") version tutteliGradleVersion
@@ -26,6 +26,10 @@ repositories {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
     kotlinOptions {
         jvmTarget = "1.6"
+
+        // so that consumers of this library using 1.3 are still happy, we don't use specific features of 1.5
+        apiVersion = "1.4"
+        languageVersion = "1.4"
     }
 }
 
