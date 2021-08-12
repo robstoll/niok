@@ -25,9 +25,11 @@ repositories {
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
     kotlinOptions {
+        //TODO change to jdk11 with 2.0.0
         jvmTarget = "1.6"
 
         // so that consumers of this library using 1.3 are still happy, we don't use specific features of 1.5
+        //TODO change to 1.5 with 2.0.0
         apiVersion = "1.4"
         languageVersion = "1.4"
     }
@@ -69,7 +71,7 @@ tasks.register<Jar>("javaDoc") {
 }
 
 detekt {
-    buildUponDefaultConfig = true
+    allRules = true
     config = files("${rootProject.projectDir}/gradle/scripts/detekt.yml")
     reports {
         xml.enabled = true
@@ -83,7 +85,7 @@ sonarqube {
     properties {
         property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.organization", "robstoll-github")
-        property("sonar.projectKey", "robstoll_niok")
+        property("sonar.projectKey", "robstoll_${rootProject.name}")
         property("sonar.projectVersion", rootProject.version)
         property("sonar.kotlin", "detekt.reportPaths=build/reports/detekt/detekt.xml")
         property("sonar.sources", "src/main/kotlin")

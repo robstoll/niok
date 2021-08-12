@@ -87,8 +87,12 @@ val Path.isRooted get(): Boolean = toFile().isRooted
 /**
  * Delegates to [kotlin.io.nameWithoutExtension].
  */
-@Deprecated("use fileNameWithoutExtension instead; will be removed with 2.0.0", ReplaceWith("this.fileNameWithoutExtension"))
-val Path.nameWithoutExtension get(): String = this.toFile().nameWithoutExtension
+@Deprecated(
+    "use fileNameWithoutExtension instead; will be removed with 2.0.0",
+    ReplaceWith("this.fileNameWithoutExtension")
+)
+val Path.nameWithoutExtension
+    get(): String = this.toFile().nameWithoutExtension
 
 /**
  * Delegates to [kotlin.io.nameWithoutExtension].

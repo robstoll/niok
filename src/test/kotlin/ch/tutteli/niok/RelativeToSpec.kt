@@ -33,8 +33,13 @@ object RelativeToSpec : Spek({
 
             )
         }
+        @Suppress("DestructuringDeclarationWithTooManyEntries")
         list.forEach { (stringPath1, stringPath2, expectRelativeTo, expectRelativize) ->
-            context("path1: $stringPath1, path2: $stringPath2 -> relativeTo: $expectRelativeTo, relativize: $expectRelativize") {
+            context(
+                "path1: $stringPath1, " +
+                    "path2: $stringPath2 -> relativeTo: $expectRelativeTo, " +
+                    "relativize: $expectRelativize"
+            ) {
                 val path1 by memoized(CachingMode.SCOPE) { tempFolder.newFile(stringPath1) }
                 val path2 by memoized(CachingMode.SCOPE) {
                     if (stringPath1 != stringPath2) {
