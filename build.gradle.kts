@@ -3,7 +3,7 @@ import java.net.URL
 buildscript {
     // needs to be defined in here because otherwise tutteli-publish plugin does not have this information when applied
     rootProject.group = "ch.tutteli.niok"
-    rootProject.version = "1.4.7"
+    rootProject.version = "1.4.8-SNAPSHOT"
     rootProject.description = "API for java.nio.file in a Kotlin idiomatic way"
 }
 
@@ -117,7 +117,7 @@ b) check if output/links are still good (use intellij's http server via -> right
 Either use the following commands or the manual steps below
 
 export NIOK_PREVIOUS_VERSION=1.4.7
-export NIOK_VERSION=1.4.7
+export NIOK_VERSION=1.4.8
 find ./ -name "*.md" | xargs perl -0777 -i \
    -pe "s@$NIOK_PREVIOUS_VERSION@$NIOK_VERSION@g;" \
    -pe "s@tree/v1.4.7@tree/v$NIOK_VERSION@g;"
@@ -152,7 +152,7 @@ Prepare next dev cycle
 -----------------------
 
 export NIOK_VERSION=1.4.7
-export NIOK_NEXT_VERSION=1.4.7
+export NIOK_NEXT_VERSION=1.4.8
 find ./ -name "*.md" | xargs perl -0777 -i \
    -pe "s@tree/v$NIOK_VERSION@tree/v1.4.7@g;";
 perl -0777 -i \
