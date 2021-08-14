@@ -10,7 +10,7 @@ buildscript {
 plugins {
     kotlin("jvm") version "1.5.21"
     id("org.jetbrains.dokka") version "1.5.0"
-    val tutteliGradleVersion = "4.0.1"
+    val tutteliGradleVersion = "4.0.2"
     id("ch.tutteli.gradle.plugins.kotlin.module.info") version tutteliGradleVersion
     id("ch.tutteli.gradle.plugins.publish") version tutteliGradleVersion
     id("ch.tutteli.gradle.plugins.spek") version tutteliGradleVersion
@@ -39,8 +39,12 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
 
-    testImplementation("ch.tutteli.atrium:atrium-fluent-en_GB:0.17.0-RC1")
-    testImplementation("ch.tutteli.spek:tutteli-spek-extensions:1.2.1")
+    val excludeNiokAndKotlin: ExternalModuleDependency.() -> Unit = {
+        exclude(group = "ch.tutteli.niok")
+        exclude(group = "org.jetbrains.kotlin")
+    }
+    testImplementation("ch.tutteli.atrium:atrium-fluent-en_GB:0.17.0-RC1", excludeNiokAndKotlin)
+    testImplementation("ch.tutteli.spek:tutteli-spek-extensions:1.2.1", excludeNiokAndKotlin)
 }
 
 val docsDir = projectDir.resolve("docs/kdoc")
