@@ -1,9 +1,9 @@
-<!-- for master -->
+<!-- for main -->
 
 [![Download](https://img.shields.io/badge/Download-1.4.7-%23007ec6)](https://search.maven.org/artifact/ch.tutteli.niok/niok/1.4.7/jar)
 [![Apache license](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)](http://opensource.org/licenses/Apache2.0)
-[![Build Status Ubuntu](https://github.com/robstoll/niok/workflows/Ubuntu/badge.svg?event=push)](https://github.com/robstoll/niok/actions?query=workflow%3AUbuntu+branch%3Amaster)
-[![Build Status Windows](https://github.com/robstoll/niok/workflows/Windows/badge.svg?event=push)](https://github.com/robstoll/niok/actions?query=workflow%3AWindows+branch%3Amaster)
+[![Build Status Ubuntu](https://github.com/robstoll/niok/workflows/Ubuntu/badge.svg?event=push)](https://github.com/robstoll/niok/actions?query=workflow%3AUbuntu+branch%3Amain)
+[![Build Status Windows](https://github.com/robstoll/niok/workflows/Windows/badge.svg?event=push)](https://github.com/robstoll/niok/actions?query=workflow%3AWindows+branch%3Amain)
 [![SonarCloud Status](https://sonarcloud.io/api/project_badges/measure?project=robstoll_niok&metric=alert_status)](https://sonarcloud.io/dashboard?id=robstoll_niok)
 
 <!-- for a specific release -->

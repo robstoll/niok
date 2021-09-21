@@ -56,7 +56,7 @@ tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
         configureEach {
             sourceLink {
                 localDirectory.set(file("src/main/kotlin"))
-                remoteUrl.set(URL("https://github.com/robstoll/niok/blob/master/src/main/kotlin"))
+                remoteUrl.set(URL("https://github.com/robstoll/niok/blob/main/src/main/kotlin"))
                 remoteLineSuffix.set("#L")
             }
         }
@@ -116,7 +116,7 @@ Release & deploy a commit
 a) gr dokka
 b) check if output/links are still good (use intellij's http server via -> right click -> open in -> browser)
 
-2. update master:
+2. update main:
 
 Either use the following commands or the manual steps below
 
@@ -131,7 +131,7 @@ perl -0777 -i \
   ./build.gradle.kts
 perl -0777 -i \
   -pe "s@$NIOK_PREVIOUS_VERSION@$NIOK_VERSION@g;" \
-  -pe 's/(<!-- for master -->\n)\n([\S\s]*?)(\n<!-- for a specific release -->\n)<!--\n([\S\s]*?)-->\n(\n# Niok)/$1<!--\n$2-->$3\n$4\n$5/;' \
+  -pe 's/(<!-- for main -->\n)\n([\S\s]*?)(\n<!-- for a specific release -->\n)<!--\n([\S\s]*?)-->\n(\n# Niok)/$1<!--\n$2-->$3\n$4\n$5/;' \
   ./README.md
 git commit -a -m "v$NIOK_VERSION"
 
@@ -164,12 +164,12 @@ perl -0777 -i \
   -pe "s/NIOK_VERSION=$NIOK_VERSION/NIOK_VERSION=$NIOK_NEXT_VERSION/;" \
   ./build.gradle.kts
 perl -0777 -i \
-  -pe 's/(<!-- for master -->\n)<!--\n([\S\s]*?)-->(\n<!-- for a specific release -->)\n([\S\s]*?)\n(\n# Niok)/$1\n$2$3\n<!--$4-->\n$5/;' \
+  -pe 's/(<!-- for main -->\n)<!--\n([\S\s]*?)-->(\n<!-- for a specific release -->)\n([\S\s]*?)\n(\n# Niok)/$1\n$2$3\n<!--$4-->\n$5/;' \
   ./README.md
 git commit -a -m "prepare dev cycle of $NIOK_NEXT_VERSION"
 
-1. point to master
-   a) search for `tag=vX.Y.Z` and replace it with `branch=master`
+1. point to main
+   a) search for `tag=vX.Y.Z` and replace it with `branch=main`
    b) search for `tree/vX.Y.Z` and replace it with `tree/v1.4.7`
 2. search for X.Y.Z and replace with X.Y.Z-SNAPSHOT
 3. commit & push changes
