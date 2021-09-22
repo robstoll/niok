@@ -10,7 +10,8 @@ buildscript {
 plugins {
     kotlin("jvm") version "1.5.31"
     id("org.jetbrains.dokka") version "1.5.30"
-    val tutteliGradleVersion = "4.0.2"
+    val tutteliGradleVersion = "4.1.0"
+    id("ch.tutteli.gradle.plugins.dokka") version tutteliGradleVersion
     id("ch.tutteli.gradle.plugins.kotlin.module.info") version tutteliGradleVersion
     id("ch.tutteli.gradle.plugins.publish") version tutteliGradleVersion
     id("ch.tutteli.gradle.plugins.spek") version tutteliGradleVersion
@@ -45,33 +46,6 @@ dependencies {
     }
     testImplementation("ch.tutteli.atrium:atrium-fluent-en_GB:0.17.0-RC1", excludeNiokAndKotlin)
     testImplementation("ch.tutteli.spek:tutteli-spek-extensions:1.2.1", excludeNiokAndKotlin)
-}
-
-val docsDir = projectDir.resolve("docs/kdoc")
-tasks.dokkaHtml.configure {
-    outputDirectory.set(docsDir)
-}
-tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
-    dokkaSourceSets {
-        configureEach {
-            sourceLink {
-                localDirectory.set(file("src/main/kotlin"))
-                remoteUrl.set(URL("https://github.com/robstoll/niok/blob/main/src/main/kotlin"))
-                remoteLineSuffix.set("#L")
-            }
-        }
-    }
-}
-
-val dokka = tasks.register("dokka") {
-    dependsOn(tasks.dokkaHtml)
-}
-tasks.register<Jar>("javaDoc") {
-    archiveClassifier.set("javadoc")
-    dependsOn(dokka)
-    doFirst {
-        from(docsDir)
-    }
 }
 
 detekt {
