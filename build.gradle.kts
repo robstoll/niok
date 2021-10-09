@@ -108,10 +108,12 @@ perl -0777 -i \
   -pe 's/(<!-- for main -->\n)\n([\S\s]*?)(\n<!-- for a specific release -->\n)<!--\n([\S\s]*?)-->\n(\n# Niok)/$1<!--\n$2-->$3\n$4\n$5/;' \
   ./README.md
 git commit -a -m "v$NIOK_VERSION"
+git tag "v$NIOK_VERSION"
 
 alternatively the manual steps:
   a) search for X.Y.Z-SNAPSHOT and replace with X.Y.Z
-  b) commit (modified build.gradle and README.md)
+  b) adjust badges in readme
+  c) commit (modified build.gradle and README.md)
 
 3. prepare release on github
    a) git tag vX.Y.Z
@@ -142,10 +144,12 @@ perl -0777 -i \
   ./README.md
 git commit -a -m "prepare dev cycle of $NIOK_NEXT_VERSION"
 
+alternatively the manual steps:
 1. point to main
    a) search for `tag=vX.Y.Z` and replace it with `branch=main`
-   b) search for `tree/vX.Y.Z` and replace it with `tree/v1.4.7`
+   b) search for `tree/vX.Y.Z` and replace it with `tree/master`
 2. search for X.Y.Z and replace with X.Y.Z-SNAPSHOT
-3. commit & push changes
+3. adjust badges in readme
+4. commit & push changes
 
 */
