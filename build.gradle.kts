@@ -9,7 +9,7 @@ buildscript {
 
 plugins {
     kotlin("jvm") version "1.6.10"
-    id("org.jetbrains.dokka") version "1.6.0"
+    id("org.jetbrains.dokka") version "1.6.10"
     val tutteliGradleVersion = "4.1.0"
     id("ch.tutteli.gradle.plugins.dokka") version tutteliGradleVersion
     id("ch.tutteli.gradle.plugins.kotlin.module.info") version tutteliGradleVersion
