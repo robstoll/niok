@@ -15,7 +15,7 @@ plugins {
     id("ch.tutteli.gradle.plugins.kotlin.module.info") version tutteliGradleVersion
     id("ch.tutteli.gradle.plugins.publish") version tutteliGradleVersion
     id("ch.tutteli.gradle.plugins.spek") version tutteliGradleVersion
-    id("io.gitlab.arturbosch.detekt") version "1.20.0"
+    id("io.gitlab.arturbosch.detekt") version "1.22.0"
     id("org.sonarqube") version "3.4.0.2513"
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 }
