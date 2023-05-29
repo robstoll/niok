@@ -1,4 +1,4 @@
-import java.net.URL
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     // needs to be defined in here because otherwise tutteli-publish plugin does not have this information when applied
@@ -8,7 +8,7 @@ buildscript {
 }
 
 plugins {
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version "1.8.21"
     id("org.jetbrains.dokka") version "1.8.10"
     val tutteliGradleVersion = "4.9.0"
     id("ch.tutteli.gradle.plugins.dokka") version tutteliGradleVersion
@@ -24,15 +24,25 @@ repositories {
     mavenCentral()
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    kotlinOptions {
-        //TODO change to jdk11 with 2.0.0
-        jvmTarget = "1.6"
+val jdkDefaultVersion = "11"
+kotlin {
+    // reading JAVA_VERSION from env to enable jdk17 build in CI
+    val jdkVersion = System.getenv("JAVA_VERSION")?.toIntOrNull() ?: jdkDefaultVersion.toInt()
+    jvmToolchain(jdkVersion)
+}
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = jdkDefaultVersion
+}
+tasks.withType<JavaCompile> {
+    sourceCompatibility = jdkDefaultVersion
+    targetCompatibility = jdkDefaultVersion
+}
 
-        // so that consumers of this library using 1.3 are still happy, we don't use specific features of 1.5
-        //TODO change to 1.5 with 2.0.0
-        apiVersion = "1.4"
-        languageVersion = "1.4"
+
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions {
+        apiVersion = "1.3"
+        languageVersion = "1.3"
     }
 }
 
@@ -44,18 +54,20 @@ dependencies {
         exclude(group = "ch.tutteli.niok")
         exclude(group = "org.jetbrains.kotlin")
     }
-    testImplementation("ch.tutteli.atrium:atrium-fluent-en_GB:0.17.0", excludeNiokAndKotlin)
+    testImplementation("ch.tutteli.atrium:atrium-fluent:1.0.0-RC2", excludeNiokAndKotlin)
     testImplementation("ch.tutteli.spek:tutteli-spek-extensions:1.2.1", excludeNiokAndKotlin)
 }
 
 detekt {
     allRules = true
     config = files("${rootProject.projectDir}/gradle/scripts/detekt.yml")
+}
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
     reports {
-        xml.enabled = true
-        html.enabled = false
-        sarif.enabled = false
-        txt.enabled = false
+        xml.required.set(true)
+        html.required.set(false)
+        sarif.required.set(false)
+        txt.required.set(false)
     }
 }
 
