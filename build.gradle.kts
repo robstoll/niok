@@ -54,7 +54,7 @@ dependencies {
         exclude(group = "ch.tutteli.niok")
         exclude(group = "org.jetbrains.kotlin")
     }
-    testImplementation("ch.tutteli.atrium:atrium-fluent:1.0.0-RC2", excludeNiokAndKotlin)
+    testImplementation("ch.tutteli.atrium:atrium-fluent:1.0.0", excludeNiokAndKotlin)
     testImplementation("ch.tutteli.spek:tutteli-spek-extensions:1.2.1", excludeNiokAndKotlin)
 }
 
