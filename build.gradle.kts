@@ -16,7 +16,6 @@ plugins {
     id("ch.tutteli.gradle.plugins.publish") version tutteliGradleVersion
     id("ch.tutteli.gradle.plugins.spek") version tutteliGradleVersion
     id("io.gitlab.arturbosch.detekt") version "1.23.0"
-    id("org.sonarqube") version "4.2.0.3129"
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
 }
 
@@ -69,23 +68,6 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
         sarif.required.set(false)
         txt.required.set(false)
     }
-}
-
-sonarqube {
-    properties {
-        property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.organization", "robstoll-github")
-        property("sonar.projectKey", "robstoll_${rootProject.name}")
-        property("sonar.projectVersion", rootProject.version)
-        property("sonar.kotlin", "detekt.reportPaths=build/reports/detekt/detekt.xml")
-        property("sonar.sources", "src/main/kotlin")
-        property("sonar.tests", "src/test/kotlin")
-        property("sonar.coverage", "jacoco.xmlReportPaths=build/reports/jacoco/report.xml")
-        property("sonar.verbose", "true")
-    }
-}
-tasks.named("sonarqube").configure {
-    dependsOn(tasks.named("detekt"))
 }
 
 nexusPublishing {
