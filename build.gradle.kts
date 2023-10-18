@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 buildscript {
     // needs to be defined in here because otherwise tutteli-publish plugin does not have this information when applied
     rootProject.group = "ch.tutteli.niok"
-    rootProject.version = "1.4.8-SNAPSHOT"
+    rootProject.version = "1.4.7"
     rootProject.description = "API for java.nio.file in a Kotlin idiomatic way"
 }
 
