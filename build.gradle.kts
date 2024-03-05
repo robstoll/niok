@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 buildscript {
     // needs to be defined in here because otherwise tutteli-publish plugin does not have this information when applied
     rootProject.group = "ch.tutteli.niok"
-    rootProject.version = "1.5.0-SNAPSHOT"
+    rootProject.version = "1.5.0"
     rootProject.description = "API for java.nio.file in a Kotlin idiomatic way"
 }
 
@@ -81,18 +81,18 @@ nexusPublishing {
 Release & deploy a commit
 --------------------------------
 1. generate dokka
-a) gr dokka
+a) gr dokkaHtml
 b) check if output/links are still good (use intellij's http server via -> right click -> open in -> browser)
 
 2. update main:
 
 Either use the following commands or the manual steps below
 
-export NIOK_PREVIOUS_VERSION=1.4.7
-export NIOK_VERSION=1.4.8
+export NIOK_PREVIOUS_VERSION=1.5.0
+export NIOK_VERSION=1.5.0
 find ./ -name "*.md" | xargs perl -0777 -i \
    -pe "s@$NIOK_PREVIOUS_VERSION@$NIOK_VERSION@g;" \
-   -pe "s@tree/v1.4.7@tree/v$NIOK_VERSION@g;"
+   -pe "s@tree/v1.5.0@tree/v$NIOK_VERSION@g;"
 perl -0777 -i \
   -pe "s@$NIOK_PREVIOUS_VERSION@$NIOK_VERSION@g;" \
   -pe "s/rootProject.version = \"$NIOK_VERSION-SNAPSHOT\"/rootProject.version = \"$NIOK_VERSION\"/;" \
@@ -125,10 +125,10 @@ alternatively the manual steps:
 Prepare next dev cycle
 -----------------------
 
-export NIOK_VERSION=1.4.7
+export NIOK_VERSION=1.5.0
 export NIOK_NEXT_VERSION=1.4.8
 find ./ -name "*.md" | xargs perl -0777 -i \
-   -pe "s@tree/v$NIOK_VERSION@tree/v1.4.7@g;";
+   -pe "s@tree/v$NIOK_VERSION@tree/v1.5.0@g;";
 perl -0777 -i \
   -pe "s/rootProject.version = \"$NIOK_VERSION\"/rootProject.version = \"$NIOK_NEXT_VERSION-SNAPSHOT\"/;" \
   -pe "s/NIOK_VERSION=$NIOK_VERSION/NIOK_VERSION=$NIOK_NEXT_VERSION/;" \
