@@ -3,12 +3,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 buildscript {
     // needs to be defined in here because otherwise tutteli-publish plugin does not have this information when applied
     rootProject.group = "ch.tutteli.niok"
-    rootProject.version = "1.4.7"
+    rootProject.version = "1.5.0-SNAPSHOT"
     rootProject.description = "API for java.nio.file in a Kotlin idiomatic way"
 }
 
 plugins {
-    kotlin("jvm") version "1.8.22"
+    kotlin("jvm") version "1.9.22"
     id("org.jetbrains.dokka") version "1.9.20"
     val tutteliGradleVersion = "5.0.1"
     id("ch.tutteli.gradle.plugins.dokka") version tutteliGradleVersion
@@ -40,8 +40,8 @@ tasks.withType<JavaCompile> {
 
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
-        apiVersion = "1.3"
-        languageVersion = "1.3"
+        apiVersion = "1.4"
+        languageVersion = "1.4"
     }
 }
 
@@ -59,7 +59,7 @@ dependencies {
 
 detekt {
     allRules = true
-    config = files("${rootProject.projectDir}/gradle/scripts/detekt.yml")
+    config.from(files("${rootProject.projectDir}/gradle/scripts/detekt.yml"))
 }
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
     reports {
